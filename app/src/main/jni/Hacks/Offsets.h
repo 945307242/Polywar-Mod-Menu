@@ -57,9 +57,12 @@ namespace Offsets {
 		
 		//GameParamsScript
 		const uint64_t GameParamsScript_get_isVIP = 0x1650600; //GameParamsScript.get_isVIP
-		
-		//PlayerConfig
-		const uint64_t PlayerConfig_Update = 0x1650600; //PlayerConfig.Update
+		const uint64_t GameParamsScript_get_isBattlepassBought = 0x16504F4; //GameParamsScript.get_isBattlepassBought
+		const uint64_t GameParamsScript_BanPlayer = 0x164E28C; //GameParamsScript.BanPlayer
+
+		//SocialNetBase
+		const uint64_t SocialNetBase_BuyVIP = 0x162E044; //SocialNetBase.BuyVIP
+
 	};
 	FieldOffsets Fields;
 	MethodOffsets Methods;
@@ -123,6 +126,11 @@ namespace Offsets {
 		
 		//GameParamsScript
 		const uint64_t GameParamsScript_get_isVIP = 0x15095C0; //GameParamsScript.get_isVIP
+		const uint64_t GameParamsScript_get_isBattlepassBought = 0x1509464; //GameParamsScript.get_isBattlepassBought
+		const uint64_t GameParamsScript_BanPlayer = 0x1506878; //GameParamsScript.BanPlayer
+				
+		//SocialNetBase
+		const uint64_t SocialNetBase_BuyVIP = 0x14DC400; //SocialNetBase.BuyVIP
 	};
 	FieldOffsets Fields;
 	MethodOffsets Methods;

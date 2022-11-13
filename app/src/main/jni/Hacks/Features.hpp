@@ -2,16 +2,29 @@ const char* ChatSpamMessage = "Polywar Mod Menu by HorridModz";
 
 namespace Features {
 	struct CurrencyHacks {
+		//Collapse VIP
 		//VIP
-		bool isVip = false;
-		bool updateToggle_Vip = false;
-		bool isToggle_VipFirstCall = true;
-		void Toggle_Vip() {
-			if (!isToggle_VipFirstCall) {
-				isVip = true;
-				updateToggle_Vip = true;
+		bool Vip_isVip = false;
+		bool updateVip_Toggle_Vip = false;
+		bool isVip_Toggle_VipFirstCall = true;
+		void Vip_Toggle_Vip() {
+			if (!isVip_Toggle_VipFirstCall) {
+				Vip_isVip = true;
+				updateVip_Toggle_Vip = true;
 			} else {
-				isToggle_VipFirstCall = false;
+				isVip_Toggle_VipFirstCall = false;
+			}
+		}
+		//Buy VIP (Permanent)
+		bool Vip_Button_isBuyVipPermanent = false;
+		bool updateVip_Button_BuyVipPermanent = false;
+		bool isVip_Button_BuyVipPermanentFirstCall = true;
+		void Vip_Button_BuyVipPermanent() {
+			if (!isVip_Button_BuyVipPermanentFirstCall) {
+				Vip_Button_isBuyVipPermanent = true;
+				updateVip_Button_BuyVipPermanent = true;
+			} else {
+				isVip_Button_BuyVipPermanentFirstCall = false;
 			}
 		}
 	};
@@ -30,32 +43,20 @@ namespace Features {
 				isToggle_FreeShoppingFirstCall = false;
 			}
 		}
-		//Free In-app Purchases
-		bool isFreeInAppPurchases = false;
-		bool updateToggle_FreeInAppPurchases = false;
-		bool isToggle_FreeInAppPurchasesFirstCall = true;
-		void Toggle_FreeInAppPurchases() {
-			if (!isToggle_FreeInAppPurchasesFirstCall) {
-				isFreeInAppPurchases = true;
-				updateToggle_FreeInAppPurchases = true;
-			} else {
-				isToggle_FreeInAppPurchasesFirstCall = false;
-			}
-		}
 	};
 	StoreHacks Store;
 
 	struct BattlePassHacks {
-		//Unlock Premium Battle Pass
-		bool Button_isUnlockPremiumBattlePass = false;
-		bool updateButton_UnlockPremiumBattlePass = false;
-		bool isButton_UnlockPremiumBattlePassFirstCall = true;
-		void Button_UnlockPremiumBattlePass() {
-			if (!isButton_UnlockPremiumBattlePassFirstCall) {
-				Button_isUnlockPremiumBattlePass = true;
-				updateButton_UnlockPremiumBattlePass = true;
+		//Unlock Premium Battle Pass (Temperary
+		bool Button_isUnlockPremiumBattlePassTemperary = false;
+		bool updateButton_UnlockPremiumBattlePassTemperary = false;
+		bool isButton_UnlockPremiumBattlePassTemperaryFirstCall = true;
+		void Button_UnlockPremiumBattlePassTemperary() {
+			if (!isButton_UnlockPremiumBattlePassTemperaryFirstCall) {
+				Button_isUnlockPremiumBattlePassTemperary = true;
+				updateButton_UnlockPremiumBattlePassTemperary = true;
 			} else {
-				isButton_UnlockPremiumBattlePassFirstCall = false;
+				isButton_UnlockPremiumBattlePassTemperaryFirstCall = false;
 			}
 		}
 		//Reset Battle Pass Rewards
@@ -1875,16 +1876,16 @@ namespace Features {
 				isCheckBox_AntibanFirstCall = false;
 			}
 		}
-		//Bypass
-		bool isBypass = false;
-		bool updateCheckBox_Bypass = false;
-		bool isCheckBox_BypassFirstCall = true;
-		void CheckBox_Bypass() {
-			if (!isCheckBox_BypassFirstCall) {
-				isBypass = true;
-				updateCheckBox_Bypass = true;
+		//Bypass Force Update
+		bool isBypassForceUpdate = false;
+		bool updateCheckBox_BypassForceUpdate = false;
+		bool isCheckBox_BypassForceUpdateFirstCall = true;
+		void CheckBox_BypassForceUpdate() {
+			if (!isCheckBox_BypassForceUpdateFirstCall) {
+				isBypassForceUpdate = true;
+				updateCheckBox_BypassForceUpdate = true;
 			} else {
-				isCheckBox_BypassFirstCall = false;
+				isCheckBox_BypassForceUpdateFirstCall = false;
 			}
 		}
 		//No Ads

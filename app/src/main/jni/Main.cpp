@@ -1,4 +1,3 @@
-int hi = 1;
 #if defined(__aarch64__)
 bool is64bit = true;
 #else
@@ -58,6 +57,7 @@ void (*HideWeapon)(void *instance, bool b);
 void (*UseGrenade)(void *instance);
 void (*Respawn)(void *instance);
 void (*Teleport)(void *instance, Vector3 pos, Vector3 rot);
+void (*BuyVIP)(void *instance, int index);
 
 void(*old_PlayerScript_Update)(void *instance);
 void PlayerScript_Update(void *instance) {
@@ -227,12 +227,36 @@ int(*old_GameParamsScript_get_isVIP)(void *instance);
 int GameParamsScript_get_isVIP(void *instance) {
     if (instance != NULL) {
         if (updatehooksready) {
-            if (Features::Currency.isVip) {
+            if (Features::Currency.Vip_isVip) {
                 return true;
             }
         }
     }
     old_GameParamsScript_get_isVIP(instance);
+}
+
+int(*old_GameParamsScript_get_isBattlepassBought)(void *instance);
+int GameParamsScript_get_isBattlepassBought(void *instance) {
+    if (instance != NULL) {
+        if (updatehooksready) {
+            if (Features::BattlePass.Button_isUnlockPremiumBattlePassTemperary) {
+                return true;
+            }
+        }
+    }
+    old_GameParamsScript_get_isBattlepassBought(instance);
+}
+
+void(*old_GameParamsScript_BanPlayer)(void *instance);
+void GameParamsScript_BanPlayer(void *instance) {
+    if (instance != NULL) {
+        if (updatehooksready) {
+            if (Features::Miscellaneous.isAntiban) {
+                return;
+            }
+        }
+    }
+    old_GameParamsScript_BanPlayer(instance);
 }
 
 // Custom Functions
@@ -313,6 +337,15 @@ void *hack_thread(void *) {
     //GameParamsScript.get_isVIP
     HOOK_LIB("libil2cpp.so", Offset2String(Offsets::Methods.GameParamsScript_get_isVIP), GameParamsScript_get_isVIP, old_GameParamsScript_get_isVIP);
 
+    //GameParamsScript.get_isBattlepassBought
+    HOOK_LIB("libil2cpp.so", Offset2String(Offsets::Methods.GameParamsScript_get_isBattlepassBought), GameParamsScript_get_isBattlepassBought, old_GameParamsScript_get_isBattlepassBought);
+
+    //GameParamsScript.BanPlayer
+    HOOK_LIB("libil2cpp.so", Offset2String(Offsets::Methods.GameParamsScript_BanPlayer), GameParamsScript_BanPlayer, old_GameParamsScript_BanPlayer);
+
+    //SocialNetBase.BuyVIP
+    BuyVIP = (void (*)(void *, int)) getAbsoluteAddress("libil2cpp.so",  Offsets::Methods.SocialNetBase_BuyVIP);
+
     hackthreaddone = 2;
     return NULL;
 }
@@ -331,12 +364,14 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("RichTextView_Polywar V1.1 Mod Menu By HorridModz\nDiscord: User123456789#6424"),
             OBFUSCATE("RichTextView_WARNING:\nI do not want to cause too much damage to the game devs or other players. If this mod menu is abused too much, I will disable it so the game is not ruined."),
             OBFUSCATE("Category_Currency"),
-            OBFUSCATE("0_Toggle_VIP"),
+            OBFUSCATE("Collapse_VIP"),
+            OBFUSCATE("0_CollapseAdd_Toggle_VIP"),
+            OBFUSCATE("1_CollapseAdd_Button_Buy VIP (Permanent)"),
             OBFUSCATE("Category_Store"),
-            OBFUSCATE("1_Toggle_Free Shopping"),
-            OBFUSCATE("2_Toggle_Free In-app Purchases"),
+            OBFUSCATE("2_Toggle_Free Shopping"),
+            //OBFUSCATE("2_Toggle_Free In-app Purchases"), //Could not find a way to implement :(
             OBFUSCATE("Category_Battle Pass"),
-            OBFUSCATE("3_Button_Unlock Premium Battle Pass"),
+            OBFUSCATE("3_Button_Unlock Premium Battle Pass (Temperary"),
             OBFUSCATE("4_Button_Reset Battle Pass Rewards"),
             OBFUSCATE("5_Toggle_Infinite Battle Pass Rewards"), //Spam collect battle pass rewards - they never stop letting you collect them
             OBFUSCATE("6_Button_Claim All Battle Pass Rewards"), //Claim all unlocked battle pass rewards
@@ -349,6 +384,7 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("11_CollapseAdd_Button_Set Battle Pass EXP"),
             OBFUSCATE("12_CollapseAdd_Button_Add Battle Pass EXP"),
             OBFUSCATE("13_CollapseAdd_Button_Remove Battle Pass EXP"),
+            OBFUSCATE("Category_Tasks"),
             OBFUSCATE("Category_Items"),
             OBFUSCATE("Collapse_Clothes"),
             OBFUSCATE("Collapse_Skins"),
@@ -516,7 +552,7 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("146_CollapseAdd_CheckBox_Freeze Match Tine"),
             OBFUSCATE("Category_Miscellaneous"),
             OBFUSCATE("147_CheckBox_True_Antiban"),
-            OBFUSCATE("148_CheckBox_Bypass_Update"), //YandexAppMetricaConfig.AppVersion
+            OBFUSCATE("148_CheckBox_Bypass Force Update"), //YandexAppMetricaConfig.AppVersion
             OBFUSCATE("149_CheckBox_True_No Ads"),
             OBFUSCATE("150_CheckBox_60 FPS"),
             OBFUSCATE("Category_About"),
@@ -552,26 +588,27 @@ void Changes(JNIEnv *env, jclass clazz, jobject obj,
     //BE CAREFUL NOT TO ACCIDENTLY REMOVE break;
     switch (featNum) {
 		//Currency
+		//Collapse VIP
 
 		//VIP
 		case 0:
-			Features::Currency.Toggle_Vip();
+			Features::Currency.Vip_Toggle_Vip();
+			break;
+		//Buy VIP (Permanent)
+		case 1:
+			Features::Currency.Vip_Button_BuyVipPermanent();
 			break;
 		//Store
 
 		//Free Shopping
-		case 1:
-			Features::Store.Toggle_FreeShopping();
-			break;
-		//Free In-app Purchases
 		case 2:
-			Features::Store.Toggle_FreeInAppPurchases();
+			Features::Store.Toggle_FreeShopping();
 			break;
 		//Battle Pass
 
-		//Unlock Premium Battle Pass
+		//Unlock Premium Battle Pass (Temperary
 		case 3:
-			Features::BattlePass.Button_UnlockPremiumBattlePass();
+			Features::BattlePass.Button_UnlockPremiumBattlePassTemperary();
 			break;
 		//Reset Battle Pass Rewards
 		case 4:
@@ -1210,9 +1247,9 @@ void Changes(JNIEnv *env, jclass clazz, jobject obj,
 		case 147:
 			Features::Miscellaneous.CheckBox_Antiban();
 			break;
-		//Bypass
+		//Bypass Force Update
 		case 148:
-			Features::Miscellaneous.CheckBox_Bypass();
+			Features::Miscellaneous.CheckBox_BypassForceUpdate();
 			break;
 		//No Ads
 		case 149:
