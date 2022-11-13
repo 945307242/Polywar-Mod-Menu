@@ -1,3 +1,4 @@
+int hi = 1;
 #if defined(__aarch64__)
 bool is64bit = true;
 #else
