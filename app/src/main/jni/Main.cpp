@@ -1,4 +1,4 @@
-a#if defined(__aarch64__)
+#if defined(__aarch64__)
 bool is64bit = true;
 #else
 bool is64bit = false;
