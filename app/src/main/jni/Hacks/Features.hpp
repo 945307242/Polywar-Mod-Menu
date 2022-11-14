@@ -2147,7 +2147,7 @@ namespace Features {
 			}
 		}
 		//Bypass Force Update
-		bool isBypassForceUpdate = false;
+		bool isBypassForceUpdate = true;
 		bool updateCheckBox_BypassForceUpdate = false;
 		bool isCheckBox_BypassForceUpdateFirstCall = true;
 		void CheckBox_BypassForceUpdate() {

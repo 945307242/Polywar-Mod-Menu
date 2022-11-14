@@ -1,0 +1,1437 @@
+Ground Friction:
+// PlayerConfig
+// Token: 0x04002E0C RID: 11788
+[Token(Token = "0x4002E0C")]
+[FieldOffset(Offset = "0x178")]
+public float GROUND_FRICTION;
+Air Friction:
+// PlayerConfig
+// Token: 0x04002E0D RID: 11789
+[Token(Token = "0x4002E0D")]
+[FieldOffset(Offset = "0x17C")]
+public float AIR_FRICTION;
+OP Auto Aim (Aimbot):
+1.
+// PlayerConfig
+// Token: 0x04002DDD RID: 11741
+[Token(Token = "0x4002DDD")]
+[FieldOffset(Offset = "0x38")]
+public ObscuredFloat autoaimForce;
+2.
+// PlayerConfig
+// Token: 0x04002DDC RID: 11740
+[Token(Token = "0x4002DDC")]
+[FieldOffset(Offset = "0x20")]
+public ObscuredFloat autoaimAngle;
+3.
+// WeaponConfig
+// Token: 0x040032A5 RID: 12965
+[Token(Token = "0x40032A5")]
+[FieldOffset(Offset = "0x1C")]
+public float aimOffsetTime;
+4.
+// WeaponConfig
+// Token: 0x040032A7 RID: 12967
+[Token(Token = "0x40032A7")]
+[FieldOffset(Offset = "0x24")]
+[Attribute(Name = "HeaderAttribute", RVA = "0x5D2068", Offset = "0x5D2068")]
+public float swayAimAmount;
+5.
+// WeaponConfig
+// Token: 0x040032A8 RID: 12968
+[Token(Token = "0x40032A8")]
+[FieldOffset(Offset = "0x28")]
+public float swayAmount;
+6.
+// WeaponConfig
+// Token: 0x040032AA RID: 12970
+[Token(Token = "0x40032AA")]
+[FieldOffset(Offset = "0x30")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5D20A0", Offset = "0x5D20A0")]
+public float swaySmoothValue;
+7.
+// WeaponConfig
+// Token: 0x040032AB RID: 12971
+[Token(Token = "0x40032AB")]
+[FieldOffset(Offset = "0x34")]
+public float swaySniperAimSmoothValue;
+
+Damage Delay:
+// PlayerConfig
+// Token: 0x04002DFA RID: 11770
+[Token(Token = "0x4002DFA")]
+[FieldOffset(Offset = "0x128")]
+public float damegeDelay;
+Player Height (Giant Player):
+// PlayerConfig
+// Token: 0x04002DEA RID: 11754
+[Token(Token = "0x4002DEA")]
+[FieldOffset(Offset = "0xA0")]
+public ObscuredFloat height;
+Head Height (Giant Head):
+// PlayerConfig
+// Token: 0x04002DF2 RID: 11762
+[Token(Token = "0x4002DF2")]
+[FieldOffset(Offset = "0x108")]
+public float headHeight;
+Jump Delay:
+// PlayerConfig
+// Token: 0x04002DE1 RID: 11745
+[Token(Token = "0x4002DE1")]
+[FieldOffset(Offset = "0x5C")]
+public float jumpDelay;
+Jump Speed:
+// PlayerConfig
+// Token: 0x04002E11 RID: 11793
+[Token(Token = "0x4002E11")]
+[FieldOffset(Offset = "0x190")]
+public ObscuredFloat jumpSpeed;
+Kill Streak:
+// PlayerConfig
+// Token: 0x04002E26 RID: 11814
+[Token(Token = "0x4002E26")]
+[FieldOffset(Offset = "0x258")]
+public int[] killStreak;
+Max Armor:
+1.
+// PlayerConfig
+// Token: 0x04002DE9 RID: 11753
+[Token(Token = "0x4002DE9")]
+[FieldOffset(Offset = "0x90")]
+public ObscuredInt maxArmor;
+2.
+// PlayerScript
+// Token: 0x0600239E RID: 9118 RVA: 0x0000A2D8 File Offset: 0x000084D8
+[Token(Token = "0x600239E")]
+[Address(RVA = "0x10E76A8", Offset = "0x10E76A8", VA = "0x10E76A8")]
+public int get_maxArmor()
+{
+	return 0;
+}
+
+Max Health:
+1.
+// PlayerConfig
+// Token: 0x04002DE8 RID: 11752
+[Token(Token = "0x4002DE8")]
+[FieldOffset(Offset = "0x80")]
+public ObscuredInt maxHealth;
+2.
+// PlayerScript
+// Token: 0x060023A2 RID: 9122 RVA: 0x0000A320 File Offset: 0x00008520
+[Token(Token = "0x60023A2")]
+[Address(RVA = "0x10E7858", Offset = "0x10E7858", VA = "0x10E7858")]
+public int get_maxHealth()
+{
+	return 0;
+}
+
+Health Regen (Godmode):
+// PlayerConfig
+// Token: 0x04002E29 RID: 11817
+[Token(Token = "0x4002E29")]
+[FieldOffset(Offset = "0x268")]
+public float regenHp;
+Run Speed:
+1.
+// PlayerConfig
+// Token: 0x04002E12 RID: 11794
+[Token(Token = "0x4002E12")]
+[FieldOffset(Offset = "0x1A8")]
+public ObscuredFloat runSpeed;
+2.
+// PlayerController
+// Token: 0x04000008 RID: 8
+[Token(Token = "0x4000008")]
+[FieldOffset(Offset = "0x1C")]
+public float runSpeed;
+Walk Speed:
+1.
+// PlayerController
+// Token: 0x04000007 RID: 7
+[Token(Token = "0x4000007")]
+[FieldOffset(Offset = "0x18")]
+public float walkSpeed;
+2.
+// PlayerScript
+// Token: 0x04002E3D RID: 11837
+[Token(Token = "0x4002E3D")]
+[FieldOffset(Offset = "0x74")]
+public float walkSpeed;
+
+Accuracy:
+1.
+// PlayerConfig
+// Token: 0x04002E02 RID: 11778
+[Token(Token = "0x4002E02")]
+[FieldOffset(Offset = "0x148")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5D1DC8", Offset = "0x5D1DC8")]
+public float smallBuffPerk_Accuracy;
+2.
+// PlayerScript
+// Token: 0x04002EC5 RID: 11973
+[Token(Token = "0x4002EC5")]
+[FieldOffset(Offset = "0x3EC")]
+[NonSerialized]
+protected float accuracyOffset;
+3.
+// PlayerScript
+// Token: 0x0600239F RID: 9119 RVA: 0x0000A2F0 File Offset: 0x000084F0
+[Token(Token = "0x600239F")]
+[Address(RVA = "0x10E7720", Offset = "0x10E7720", VA = "0x10E7720")]
+public float get_CurrentAccuracy()
+{
+	return 0f;
+}
+4.
+// WeaponScript
+// Token: 0x0400323B RID: 12859
+[Token(Token = "0x400323B")]
+[FieldOffset(Offset = "0xDC")]
+[NonSerialized]
+public float accuarcy;
+5.
+// WeaponScript
+// Token: 0x04003274 RID: 12916
+[Token(Token = "0x4003274")]
+[FieldOffset(Offset = "0x290")]
+public float WeaponAccuracy;
+No Recoil:
+1.
+// PlayerConfig
+// Token: 0x04002DE7 RID: 11751
+[Token(Token = "0x4002DE7")]
+[FieldOffset(Offset = "0x7C")]
+public float spreadSize;
+2.
+// WeaponScript
+// Token: 0x04003289 RID: 12937
+[Token(Token = "0x4003289")]
+[FieldOffset(Offset = "0x2FC")]
+[NonSerialized]
+public Vector3 recoil;
+Sprint Speed:
+// PlayerConfig
+// Token: 0x04002E13 RID: 11795
+[Token(Token = "0x4002E13")]
+[FieldOffset(Offset = "0x1C0")]
+public ObscuredFloat sprintSpeed;
+Jump Force:
+// PlayerController
+// Token: 0x0400000A RID: 10
+[Token(Token = "0x400000A")]
+[FieldOffset(Offset = "0x24")]
+public float jumpForce;
+Is Grounded (Infinite Jump / Fly):
+1.
+// PlayerController
+// Token: 0x0600000A RID: 10 RVA: 0x00002054 File Offset: 0x00000254
+[Token(Token = "0x600000A")]
+[Address(RVA = "0x10E6CC4", Offset = "0x10E6CC4", VA = "0x10E6CC4")]
+private bool Grounded()
+{
+	return default(bool);
+}
+2.
+// PlayerScript
+// Token: 0x04002E8F RID: 11919
+[Token(Token = "0x4002E8F")]
+[FieldOffset(Offset = "0x2F4")]
+public bool grounded;
+
+Add Weapon EXP (Max Level Weapons):
+// PlayerScript
+// Token: 0x06002434 RID: 9268 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002434")]
+[Address(RVA = "0x11045A4", Offset = "0x11045A4", VA = "0x11045A4")]
+protected void AddWeaponExp(int weaponId, int expCount)
+{
+}
+Armor Damage (Godmode):
+// PlayerScript
+// Token: 0x06002420 RID: 9248 RVA: 0x0000A5F0 File Offset: 0x000087F0
+[Token(Token = "0x6002420")]
+[Address(RVA = "0x10FF164", Offset = "0x10FF164", VA = "0x10FF164")]
+private short CalcArmorDamage(short _damage, ArmorDescObj ado, int weaponType)
+{
+	return 0;
+}
+Shot Point (Silent Aim / Godmode):
+// PlayerScript
+// Token: 0x060023F2 RID: 9202 RVA: 0x0000A530 File Offset: 0x00008730
+[Token(Token = "0x60023F2")]
+[Address(RVA = "0x10FB968", Offset = "0x10FB968", VA = "0x10FB968")]
+private Vector3 calcShotPoint(Vector3 rayOrigin, Vector3 rayDirection, float Distance)
+{
+	return default(Vector3);
+}
+Can Use Item:
+// PlayerScript
+// Token: 0x060023A5 RID: 9125 RVA: 0x0000A368 File Offset: 0x00008568
+[Token(Token = "0x60023A5")]
+[Address(RVA = "0x10E7CFC", Offset = "0x10E7CFC", VA = "0x10E7CFC")]
+public bool canUse(FastInventar fastInventar)
+{
+	return default(bool);
+}
+Chat Message (Chat Spam):
+1.
+// PlayerScript
+// Token: 0x06002400 RID: 9216 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002400")]
+[Address(RVA = "0x10FD200", Offset = "0x10FD200", VA = "0x10FD200")]
+public void ChatMessage(string message)
+{
+}
+2.
+// PlayerScript
+// Token: 0x06002403 RID: 9219 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002403")]
+[Address(RVA = "0x10FD388", Offset = "0x10FD388", VA = "0x10FD388")]
+[PunRPC]
+private void _ChatMessage(string _message, PhotonMessageInfo info)
+{
+}
+3.
+	// Token: 0x060023FF RID: 9215 RVA: 0x00002050 File Offset: 0x00000250
+	[Token(Token = "0x60023FF")]
+	[Address(RVA = "0x10FCF74", Offset = "0x10FCF74", VA = "0x10FCF74")]
+	public void ChatPlayerMessage(string message, bool team = false)
+	{
+	}
+4.
+// PlayerScript
+// Token: 0x06002401 RID: 9217 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002401")]
+[Address(RVA = "0xF70874", Offset = "0xF70874", VA = "0xF70874")]
+public void ChatTeamMessage(string message, int team)
+{
+}
+5.
+// PlayerScript
+// Token: 0x06002404 RID: 9220 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002404")]
+[Address(RVA = "0x10FD560", Offset = "0x10FD560", VA = "0x10FD560")]
+[PunRPC]
+private void _ChatTeamMessage(string _message, int team, PhotonMessageInfo info)
+{
+}
+Create Shot (Silent Aim / Kill Everyone / Auto Fire):
+// PlayerScript
+// Token: 0x060023F3 RID: 9203 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x60023F3")]
+[Address(RVA = "0x10F857C", Offset = "0x10F857C", VA = "0x10F857C")]
+public void CreateShot(Vector3 rayOrigin, Vector3 rayDirection, int numWeapon)
+{
+}
+Damage Others / Kill Others (Mass Kill):
+Idea:
+Kill all or kill player by name
+1.
+// PlayerScript
+// Token: 0x06002464 RID: 9316 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002464")]
+[Address(RVA = "0x1109278", Offset = "0x1109278", VA = "0x1109278", Slot = "7")]
+public override void DamageOther(Pawn pawn)
+{
+}
+2.
+// PlayerScript
+// Token: 0x06002423 RID: 9251 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002423")]
+[Address(RVA = "0x11012BC", Offset = "0x11012BC", VA = "0x11012BC")]
+[PunRPC]
+private void _ApplyDamage(short _damage, short efromPos, short edmgPos, short _h, PhotonMessageInfo info)
+{
+}
+
+Die (Anti-Death?):
+// PlayerScript
+// Token: 0x0600242F RID: 9263 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600242F")]
+[Address(RVA = "0x11021BC", Offset = "0x11021BC", VA = "0x11021BC")]
+public void Die(int id_killer, int myPoints, bool isHeadshot, short weaponType, short damage)
+{
+}
+Encode Position (Teleport):
+// PlayerScript
+// Token: 0x06002421 RID: 9249 RVA: 0x0000A608 File Offset: 0x00008808
+[Token(Token = "0x6002421")]
+[Address(RVA = "0x10FF078", Offset = "0x10FF078", VA = "0x10FF078")]
+public static short encodePosXZ(Vector3 damagePos)
+{
+	return 0;
+}
+Decode Position:
+// PlayerScript
+// Token: 0x06002422 RID: 9250 RVA: 0x0000A620 File Offset: 0x00008820
+[Token(Token = "0x6002422")]
+[Address(RVA = "0x11012A0", Offset = "0x11012A0", VA = "0x11012A0")]
+public static Vector3 decodePosXZ(short damagePos)
+{
+	return default(Vector3);
+}
+Get Grenade (Infinite Grenades):
+// PlayerScript
+// Token: 0x060023B6 RID: 9142 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x60023B6")]
+[Address(RVA = "0x10ED670", Offset = "0x10ED670", VA = "0x10ED670")]
+private void GetGrenade()
+{
+}
+Get Health (Auto-regen / godmode):
+// PlayerScript
+// Token: 0x0600244B RID: 9291 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600244B")]
+[Address(RVA = "0x11084D8", Offset = "0x11084D8", VA = "0x11084D8")]
+public void GetHealth(int bulletsGroup, int bulletsAmount)
+{
+}
+Get Kill Streak Bonus (Fake Kill Streak):
+// PlayerScript
+// Token: 0x06002446 RID: 9286 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002446")]
+[Address(RVA = "0x1104EAC", Offset = "0x1104EAC", VA = "0x1104EAC")]
+private void GetKillStreakBonus()
+{
+}
+Get Team (Kill Teammates / Switch Team / Godmode):
+1.
+// PlayerScript
+// Token: 0x060023BD RID: 9149 RVA: 0x0000A428 File Offset: 0x00008628
+[Token(Token = "0x60023BD")]
+[Address(RVA = "0x10EDFA4", Offset = "0x10EDFA4", VA = "0x10EDFA4", Slot = "4")]
+public override int getTeam()
+{
+	return 0;
+}
+2.
+// PlayerScript
+// Token: 0x04002E77 RID: 11895
+[Token(Token = "0x4002E77")]
+[FieldOffset(Offset = "0x238")]
+public int team;
+3.
+// TeamControllerBase
+// Token: 0x06002195 RID: 8597 RVA: 0x00009D68 File Offset: 0x00007F68
+[Token(Token = "0x6002195")]
+[Address(RVA = "0x13033E0", Offset = "0x13033E0", VA = "0x13033E0")]
+public int DetectTeam()
+{
+	return 0;
+}
+Give Item (Spawn in Items):
+// PlayerScript
+// Token: 0x0600243E RID: 9278 RVA: 0x0000A6B0 File Offset: 0x000088B0
+[Token(Token = "0x600243E")]
+[Address(RVA = "0x11058E8", Offset = "0x11058E8", VA = "0x11058E8")]
+public bool GiveItem(FastInventar fi, int cnt)
+{
+	return default(bool);
+}
+Has Keys (Unlock All Keys):
+// PlayerScript
+// Token: 0x06002453 RID: 9299 RVA: 0x0000A6E0 File Offset: 0x000088E0
+[Token(Token = "0x6002453")]
+[Address(RVA = "0x1108AE0", Offset = "0x1108AE0", VA = "0x1108AE0")]
+public bool HaveKeys(bool _red, bool _green, bool _blue, bool _gold)
+{
+	return default(bool);
+}
+Reload Gun (Auto Reload):
+1.
+// PlayerScript
+// Token: 0x060023CE RID: 9166 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x60023CE")]
+[Address(RVA = "0x10F0C24", Offset = "0x10F0C24", VA = "0x10F0C24")]
+private void ReloadGun()
+{
+}
+2.
+// WeaponScript
+// Token: 0x0600283D RID: 10301 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600283D")]
+[Address(RVA = "0x11C0078", Offset = "0x11C0078", VA = "0x11C0078")]
+public void WeaponReload()
+{
+}
+Restore Bullets (Infinite Ammo Hack):
+1.
+// PlayerScript
+// Token: 0x06002450 RID: 9296 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002450")]
+[Address(RVA = "0x11086B0", Offset = "0x11086B0", VA = "0x11086B0")]
+public void RestoreBullets(string bulletsToRestore)
+{
+}
+2.
+// PlayerScript
+// Token: 0x06002451 RID: 9297 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002451")]
+[Address(RVA = "0x110883C", Offset = "0x110883C", VA = "0x110883C")]
+public void RestoreBullets(int[] _bullets)
+{
+}
+Current Weapon (Change Weapon):
+1.
+// PlayerScript
+// Token: 0x0600240E RID: 9230 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600240E")]
+[Address(RVA = "0x10FED00", Offset = "0x10FED00", VA = "0x10FED00")]
+[PunRPC]
+private void _ChangedWeapon(string setup, PhotonMessageInfo info)
+{
+}
+2.
+// PlayerScript
+// Token: 0x0600240D RID: 9229 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600240D")]
+[Address(RVA = "0x10FDD3C", Offset = "0x10FDD3C", VA = "0x10FDD3C")]
+protected void _ChangeWeapon(int _numWeapon, int[] currentSetup)
+{
+}
+3.
+// PlayerScript
+// Token: 0x04002E57 RID: 11863
+[Token(Token = "0x4002E57")]
+[FieldOffset(Offset = "0x108")]
+public ObscuredInt currentWeapon;
+4.
+// PlayerScript
+// Token: 0x04002F00 RID: 12032
+[Token(Token = "0x4002F00")]
+[FieldOffset(Offset = "0x544")]
+private int _currentWeapon2;
+Apply Effect:
+// PlayerScript
+// Token: 0x06002433 RID: 9267 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002433")]
+[Address(RVA = "0x1104390", Offset = "0x1104390", VA = "0x1104390")]
+[PunRPC]
+private void _Effect(int id, Vector3i pos)
+{
+}
+Auto Respawn:
+// PlayerScript
+// Token: 0x0600245A RID: 9306 RVA: 0x0000A710 File Offset: 0x00008910
+[Token(Token = "0x600245A")]
+[Address(RVA = "0x10F0B14", Offset = "0x10F0B14", VA = "0x10F0B14")]
+public bool get_autoRespawn()
+{
+	return default(bool);
+}
+Disable Fog:
+// PlayerScript
+// Token: 0x060023FC RID: 9212 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x60023FC")]
+[Address(RVA = "0x10FC5A4", Offset = "0x10FC5A4", VA = "0x10FC5A4")]
+protected static void set_fogMode(int value)
+{
+}
+Is Next Master (Almost Host Match):
+// PlayerScript
+// Token: 0x06002459 RID: 9305 RVA: 0x0000A6F8 File Offset: 0x000088F8
+[Token(Token = "0x6002459")]
+[Address(RVA = "0x1108F58", Offset = "0x1108F58", VA = "0x1108F58")]
+public bool get_isNextMaster()
+{
+	return default(bool);
+}
+Melee Available (Melee Spam):
+// PlayerScript
+// Token: 0x060023D1 RID: 9169 RVA: 0x0000A4A0 File Offset: 0x000086A0
+[Token(Token = "0x60023D1")]
+[Address(RVA = "0x10F11F4", Offset = "0x10F11F4", VA = "0x10F11F4")]
+private bool get_MeleeAvailable()
+{
+	return default(bool);
+}
+Owner (Host Match):
+// PlayerScript
+// Token: 0x0600238E RID: 9102 RVA: 0x0000206A File Offset: 0x0000026A
+[Token(Token = "0x600238E")]
+[Address(RVA = "0x10E6DE4", Offset = "0x10E6DE4", VA = "0x10E6DE4")]
+public PhotonPlayer get_owner()
+{
+	return null;
+}
+Player Name:
+// PlayerScript
+// Token: 0x060023A1 RID: 9121 RVA: 0x0000206A File Offset: 0x0000026A
+[Token(Token = "0x60023A1")]
+[Address(RVA = "0x10E7774", Offset = "0x10E7774", VA = "0x10E7774")]
+public string get_playerName()
+{
+	return null;
+}
+Stamina:
+// PlayerScript
+// Token: 0x0600239D RID: 9117 RVA: 0x0000A2C0 File Offset: 0x000084C0
+[Token(Token = "0x600239D")]
+[Address(RVA = "0x10E7614", Offset = "0x10E7614", VA = "0x10E7614")]
+public float get_stamina()
+{
+	return 0f;
+}
+Use Grenade (Grenade Throw / Grenade Spam):
+1.
+// PlayerScript
+// Token: 0x0600239B RID: 9115 RVA: 0x0000A2A8 File Offset: 0x000084A8
+[Token(Token = "0x600239B")]
+[Address(RVA = "0x10E72E8", Offset = "0x10E72E8", VA = "0x10E72E8")]
+private bool get_throwingGrenade()
+{
+	return default(bool);
+}
+2.
+// WeaponScript
+// Token: 0x06002852 RID: 10322 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002852")]
+[Address(RVA = "0x11C37B4", Offset = "0x11C37B4", VA = "0x11C37B4")]
+public void UseGrenade()
+{
+}
+Weapon Weight (Mobility):
+// PlayerScript
+// Token: 0x06002394 RID: 9108 RVA: 0x0000A248 File Offset: 0x00008448
+[Token(Token = "0x6002394")]
+[Address(RVA = "0x10E7304", Offset = "0x10E7304", VA = "0x10E7304")]
+internal float get_weaponWeight()
+{
+	return 0f;
+}
+Weapon Zoom / Scope:
+1.
+// PlayerScript
+// Token: 0x060023C4 RID: 9156 RVA: 0x0000A458 File Offset: 0x00008658
+[Token(Token = "0x60023C4")]
+[Address(RVA = "0x10EE988", Offset = "0x10EE988", VA = "0x10EE988")]
+public float get_Zoom()
+{
+	return 0f;
+}
+2.
+// PlayerScript
+// Token: 0x04002E95 RID: 11925
+[Token(Token = "0x4002E95")]
+[FieldOffset(Offset = "0x304")]
+private float zoom_value;
+Can Sprint:
+// PlayerScript
+// Token: 0x06002392 RID: 9106 RVA: 0x0000A230 File Offset: 0x00008430
+[Token(Token = "0x6002392")]
+[Address(RVA = "0x10E7168", Offset = "0x10E7168", VA = "0x10E7168")]
+public bool get__sprint()
+{
+	return default(bool);
+}
+Has Flag (Get Flag / Flag Capture Easy Win):
+1.
+// PlayerScript
+// Token: 0x04002E53 RID: 11859
+[Token(Token = "0x4002E53")]
+[FieldOffset(Offset = "0xF8")]
+[HideInInspector]
+public bool carryingTheFlag;
+2.
+// PlayerScript
+// Token: 0x04002E52 RID: 11858
+[Token(Token = "0x4002E52")]
+[FieldOffset(Offset = "0xF0")]
+public Transform flagHolder;
+Fall Damage (Disable Fall Damage):
+// PlayerScript
+// Token: 0x04002E3C RID: 11836
+[Token(Token = "0x4002E3C")]
+[FieldOffset(Offset = "0x70")]
+public float fallDamage;
+Kills:
+1.
+// PlayerScript
+// Token: 0x04002E65 RID: 11877
+[Token(Token = "0x4002E65")]
+[FieldOffset(Offset = "0x198")]
+public int kills;
+2.
+// PlayerScript
+// Token: 0x04002F01 RID: 12033
+[Token(Token = "0x4002F01")]
+[FieldOffset(Offset = "0x548")]
+private int _kills2;
+
+Is In Damage Zone (Disable Damage Zone Damage):
+// PlayerScript
+// Token: 0x04002EC9 RID: 11977
+[Token(Token = "0x4002EC9")]
+[FieldOffset(Offset = "0x401")]
+[NonSerialized]
+public bool isDamageZone;
+Kill Streak:
+// PlayerScript
+// Token: 0x04002EF5 RID: 12021
+[Token(Token = "0x4002EF5")]
+[FieldOffset(Offset = "0x508")]
+private int killStreakCount;
+Rapid Fire:
+1.
+// PlayerScript
+// Token: 0x04002E63 RID: 11875
+[Token(Token = "0x4002E63")]
+[FieldOffset(Offset = "0x17C")]
+public float lastShotTime;
+2.
+// PlayerScript
+// Token: 0x04002EB7 RID: 11959
+[Token(Token = "0x4002EB7")]
+[FieldOffset(Offset = "0x394")]
+private float timeToNextShot;
+Points (Score):
+1.
+// PlayerScript
+// Token: 0x04002E6B RID: 11883
+[Token(Token = "0x4002E6B")]
+[FieldOffset(Offset = "0x1C8")]
+public ObscuredInt points;
+2.
+// PlayerScript
+// Token: 0x04002E66 RID: 11878
+[Token(Token = "0x4002E66")]
+[FieldOffset(Offset = "0x19C")]
+public int score;
+
+Enemy Points for Killing You (0 Kil Points):
+// PlayerScript
+// Token: 0x04002E61 RID: 11873
+[Token(Token = "0x4002E61")]
+[FieldOffset(Offset = "0x174")]
+public int pointsForKillMe;
+Respawn Place:
+1.
+// PlayerScript
+// Token: 0x04002EF1 RID: 12017
+[Token(Token = "0x4002EF1")]
+[FieldOffset(Offset = "0x4F0")]
+internal Transform respawnPlace;
+2.
+// TeamControllerBase
+// Token: 0x06002197 RID: 8599 RVA: 0x0000206A File Offset: 0x0000026A
+[Token(Token = "0x6002197")]
+[Address(RVA = "0x1303BE4", Offset = "0x1303BE4", VA = "0x1303BE4", Slot = "20")]
+public override Transform respawnPlace()
+{
+	return null;
+}
+3.
+// TeamControllerBase
+// Token: 0x06002198 RID: 8600 RVA: 0x0000206A File Offset: 0x0000026A
+[Token(Token = "0x6002198")]
+[Address(RVA = "0x1303C64", Offset = "0x1303C64", VA = "0x1303C64", Slot = "19")]
+public override Transform respawnPlaceForTeam(int team)
+{
+	return null;
+}
+Auto Fire:
+// PlayerScript
+// Token: 0x04002EDA RID: 11994
+[Token(Token = "0x4002EDA")]
+[FieldOffset(Offset = "0x448")]
+protected bool _autoFire;
+Inventory Items:
+1.
+// PlayerScript
+// Token: 0x04002E88 RID: 11912
+[Token(Token = "0x4002E88")]
+[FieldOffset(Offset = "0x2B8")]
+protected FastInventar[] _inventory;
+2.
+// RandomController
+// Token: 0x06002130 RID: 8496 RVA: 0x0000206A File Offset: 0x0000026A
+[Token(Token = "0x6002130")]
+[Address(RVA = "0x12A20A8", Offset = "0x12A20A8", VA = "0x12A20A8", Slot = "21")]
+public override FastInventar[] MakeInventory(FastInventar[] fi)
+{
+	return null;
+}
+3.
+// GameParamsScript
+// Token: 0x0400273F RID: 10047
+[Token(Token = "0x400273F")]
+[FieldOffset(Offset = "0xD8")]
+public int[] inventarItems;
+Anti-ban:
+// GameParamsScript
+// Token: 0x06001E1C RID: 7708 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E1C")]
+[Address(RVA = "0x10B6830", Offset = "0x10B6830", VA = "0x10B6830")]
+public void BanPlayer(string reason = "cheat")
+{
+}
+Unlock Item / Unlock All:
+1.
+// GameParamsScript
+// Token: 0x06001E17 RID: 7703 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E17")]
+[Address(RVA = "0x10B55C0", Offset = "0x10B55C0", VA = "0x10B55C0")]
+internal void BuyItemOnMarket(long id, int skinId, float price, ServerCallback onBuyCallback)
+{
+}
+2.
+// GameParamsScript
+// Token: 0x06001E67 RID: 7783 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E67")]
+[Address(RVA = "0x10BD600", Offset = "0x10BD600", VA = "0x10BD600")]
+public void giveItem(GiveGoldEnum cs, FastInventar fi, int cnt, [Optional] VoidCallback cb)
+{
+}
+3.
+// GameParamsScript
+// Token: 0x06001E1A RID: 7706 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E1A")]
+[Address(RVA = "0x10B667C", Offset = "0x10B667C", VA = "0x10B667C")]
+public void giveItem1002(int i, int cnt)
+{
+}
+Unlock Skin / Unlock All Skins:
+1.
+// GameParamsScript
+// Token: 0x06001E58 RID: 7768 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E58")]
+[Address(RVA = "0x10BB558", Offset = "0x10BB558", VA = "0x10BB558")]
+public void BuySkin(int currentChar, int numSkin)
+{
+}
+2.
+// GameParamsScript
+// Token: 0x06001E34 RID: 7732 RVA: 0x00009138 File Offset: 0x00007338
+[Token(Token = "0x6001E34")]
+[Address(RVA = "0x10B8414", Offset = "0x10B8414", VA = "0x10B8414")]
+public int GetCharSkin(int currentChar, bool onlyAvail)
+{
+	return 0;
+}
+3.
+// GameParamsScript
+// Token: 0x06001E14 RID: 7700 RVA: 0x00009060 File Offset: 0x00007260
+[Token(Token = "0x6001E14")]
+[Address(RVA = "0x10B543C", Offset = "0x10B543C", VA = "0x10B543C")]
+internal bool get_AllSkinsUnlocked()
+{
+	return default(bool);
+}
+Unlock VIP (Permanent):
+// GameParamsScript
+// Token: 0x06001E61 RID: 7777 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E61")]
+[Address(RVA = "0x10BC9D0", Offset = "0x10BC9D0", VA = "0x10BC9D0")]
+public void BuyVIP(int numVIP, GameObject go, string method)
+{
+}
+Unlock VIP:
+// GameParamsScript
+// Token: 0x06001E3B RID: 7739 RVA: 0x000091B0 File Offset: 0x000073B0
+[Token(Token = "0x6001E3B")]
+[Address(RVA = "0x10B89B8", Offset = "0x10B89B8", VA = "0x10B89B8")]
+public bool get_isVIP()
+{
+	return default(bool);
+}
+Unlock Weapon / Unlock All Weapons:
+// GameParamsScript
+// Token: 0x06001E55 RID: 7765 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E55")]
+[Address(RVA = "0x10BAD34", Offset = "0x10BAD34", VA = "0x10BAD34")]
+public void BuyWeapon(int numWeapon, int tarif, GameObject go, string method)
+{
+}
+Unlock Weapon Skin / Unlock All Weapon Skins:
+// GameParamsScript
+// Token: 0x06001E6A RID: 7786 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E6A")]
+[Address(RVA = "0x10BE15C", Offset = "0x10BE15C", VA = "0x10BE15C")]
+public void BuyWeaponSkin(int weaponId, int group, int index, GameObject gameObject, string p)
+{
+}
+Buy Weapon Upgrade (Max Upgrade Weapon):
+1.
+// GameParamsScript
+// Token: 0x06001E6B RID: 7787 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E6B")]
+[Address(RVA = "0x10BE398", Offset = "0x10BE398", VA = "0x10BE398")]
+public void BuyWeaponUpgrade(int weaponId, int group, int index, GameObject gameObject, string p)
+{
+}
+2.
+// Token: 0x06002A60 RID: 10848 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002A60")]
+[Address(RVA = "0x11BCB38", Offset = "0x11BCB38", VA = "0x11BCB38")]
+public void AddExp(int weaponId, int expCount)
+{
+}
+3.
+// Token: 0x06002434 RID: 9268 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002434")]
+[Address(RVA = "0x11045A4", Offset = "0x11045A4", VA = "0x11045A4")]
+protected void AddWeaponExp(int weaponId, int expCount)
+{
+}
+Weapon Level (Max Level Weapons):
+1.
+// Token: 0x06002A61 RID: 10849 RVA: 0x0000B868 File Offset: 0x00009A68
+[Token(Token = "0x6002A61")]
+[Address(RVA = "0x11BCC54", Offset = "0x11BCC54", VA = "0x11BCC54")]
+public int GetWeaponExp(int weaponId)
+{
+	return 0;
+}
+2.
+// WeaponExp
+// Token: 0x06002A66 RID: 10854 RVA: 0x0000B8E0 File Offset: 0x00009AE0
+[Token(Token = "0x6002A66")]
+[Address(RVA = "0x11BCEA4", Offset = "0x11BCEA4", VA = "0x11BCEA4")]
+public int GetExpToLevelUp(int currentLevel, int exp)
+{
+	return 0;
+}
+3.
+// WeaponExp
+// Token: 0x06002A64 RID: 10852 RVA: 0x0000B8B0 File Offset: 0x00009AB0
+[Token(Token = "0x6002A64")]
+[Address(RVA = "0x11BCD84", Offset = "0x11BCD84", VA = "0x11BCD84")]
+public int GetExp(int level)
+{
+	return 0;
+}
+4.
+// WeaponExp
+// Token: 0x06002A63 RID: 10851 RVA: 0x0000B898 File Offset: 0x00009A98
+[Token(Token = "0x6002A63")]
+[Address(RVA = "0x11BCCF8", Offset = "0x11BCCF8", VA = "0x11BCCF8")]
+public int GetLevel(int exp)
+{
+	return 0;
+}
+5.
+// WeaponExp
+// Token: 0x06002A61 RID: 10849 RVA: 0x0000B868 File Offset: 0x00009A68
+[Token(Token = "0x6002A61")]
+[Address(RVA = "0x11BCC54", Offset = "0x11BCC54", VA = "0x11BCC54")]
+public int GetWeaponExp(int weaponId)
+{
+	return 0;
+}
+6.
+// WeaponExp
+// Token: 0x06002A62 RID: 10850 RVA: 0x0000B880 File Offset: 0x00009A80
+[Token(Token = "0x6002A62")]
+[Address(RVA = "0x11B5CD4", Offset = "0x11B5CD4", VA = "0x11B5CD4")]
+public int GetWeaponLevel(int weaponId)
+{
+	return 0;
+}
+7.
+// WeaponExp
+// Token: 0x04003386 RID: 13190
+[Token(Token = "0x4003386")]
+[FieldOffset(Offset = "0x18")]
+[NonSerialized]
+public ObscuredInt[] weaponExp;
+8.
+// WeaponExp
+// Token: 0x04003388 RID: 13192
+[Token(Token = "0x4003388")]
+[FieldOffset(Offset = "0x28")]
+public int weaponLevelCount;
+9.
+// WeaponExp
+// Token: 0x04003389 RID: 13193
+[Token(Token = "0x4003389")]
+[FieldOffset(Offset = "0x2C")]
+public int weaponLevelExp;
+Weapon Projectile Speed:
+// WeaponController
+// Token: 0x0400018F RID: 399
+[Token(Token = "0x400018F")]
+[FieldOffset(Offset = "0x60")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5CC15C", Offset = "0x5CC15C")]
+public float projectileSpeed;
+Weapon Reload Speed (Fast Reload / No Reload):
+1.
+// WeaponController
+// Token: 0x04000190 RID: 400
+[Token(Token = "0x4000190")]
+[FieldOffset(Offset = "0x64")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5CC194", Offset = "0x5CC194")]
+public float reloadSpeed;
+2.
+// WeaponScript
+// Token: 0x0600283E RID: 10302 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600283E")]
+[Address(RVA = "0x11C04A8", Offset = "0x11C04A8", VA = "0x11C04A8")]
+private void IncreaseReloadSpeed(float speedMul = 100f)
+{
+}
+Silent Aim:
+1.
+// WeaponController
+// Token: 0x04000192 RID: 402
+[Token(Token = "0x4000192")]
+[FieldOffset(Offset = "0x70")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5CC204", Offset = "0x5CC204")]
+public bool areaDamage;
+2.
+// WeaponController
+// Token: 0x04000193 RID: 403
+[Token(Token = "0x4000193")]
+[FieldOffset(Offset = "0x74")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5CC23C", Offset = "0x5CC23C")]
+public float areaRadius;
+Fire Rate (Rapid Fire):
+// Weapon
+// Token: 0x04000185 RID: 389
+[Token(Token = "0x4000185")]
+[FieldOffset(Offset = "0x20")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5CBF2C", Offset = "0x5CBF2C")]
+public float fireRate;
+Magazine / Ammo In Clip (Infinite Ammo):
+1.
+// Weapon
+// Token: 0x04000183 RID: 387
+[Token(Token = "0x4000183")]
+[FieldOffset(Offset = "0x18")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5CBEBC", Offset = "0x5CBEBC")]
+public int magazine;
+2.
+// WeaponScript
+// Token: 0x04003272 RID: 12914
+[Token(Token = "0x4003272")]
+[FieldOffset(Offset = "0x278")]
+public ObscuredIntAB bullets;
+3.
+// WeaponScript
+// Token: 0x04003273 RID: 12915
+[Token(Token = "0x4003273")]
+[FieldOffset(Offset = "0x284")]
+public ObscuredIntAB clips;
+4.
+// WeaponScript
+// Token: 0x04003277 RID: 12919
+[Token(Token = "0x4003277")]
+[FieldOffset(Offset = "0x298")]
+public int clipSize;
+Damage (1-hit kill / insta-kill):
+1.
+// Weapon
+// Token: 0x04000184 RID: 388
+[Token(Token = "0x4000184")]
+[FieldOffset(Offset = "0x1C")]
+[Attribute(Name = "TooltipAttribute", RVA = "0x5CBEF4", Offset = "0x5CBEF4")]
+public float weaponDamage;
+2.
+// WeaponScript
+// Token: 0x04003279 RID: 12921
+[Token(Token = "0x4003279")]
+[FieldOffset(Offset = "0x2A0")]
+public short Damage;
+Can Shoot (Infinite Ammo / No Reload / Fire Rate (Rapid Fire))
+Skin (Visual):
+1.
+// WeaponScript
+// Token: 0x0600284D RID: 10317 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600284D")]
+[Address(RVA = "0x11C2F64", Offset = "0x11C2F64", VA = "0x11C2F64")]
+public void DressSkin(int playerSkin, int team)
+{
+}
+2.
+// GameParamsScript
+// Token: 0x06001E33 RID: 7731 RVA: 0x00009120 File Offset: 0x00007320
+[Token(Token = "0x6001E33")]
+[Address(RVA = "0x10B8358", Offset = "0x10B8358", VA = "0x10B8358")]
+public int GetCurrentCharSkin(int currentChar)
+{
+	return 0;
+}
+3.
+// GameParamsScript
+// Token: 0x06001E32 RID: 7730 RVA: 0x00009108 File Offset: 0x00007308
+[Token(Token = "0x6001E32")]
+[Address(RVA = "0x10B82A0", Offset = "0x10B82A0", VA = "0x10B82A0")]
+public int GetDefCharSkin(int idCustom)
+{
+	return 0;
+}
+4.
+// GameParamsScript
+// Token: 0x06001E3D RID: 7741 RVA: 0x000091E0 File Offset: 0x000073E0
+[Token(Token = "0x6001E3D")]
+[Address(RVA = "0x10B8AD0", Offset = "0x10B8AD0", VA = "0x10B8AD0")]
+public int get_playerSkin()
+{
+	return 0;
+}
+Skin (Permanent):
+// GameParamsScript
+// Token: 0x06001E62 RID: 7778 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E62")]
+[Address(RVA = "0x10BCB64", Offset = "0x10BCB64", VA = "0x10BCB64")]
+public void SetSkin(int playerChar, int numSkin)
+{
+}
+Hide Weapon:
+1.
+// WeaponScript
+// Token: 0x06002849 RID: 10313 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002849")]
+[Address(RVA = "0x11C2C54", Offset = "0x11C2C54", VA = "0x11C2C54")]
+public void HideWeapon(bool b)
+{
+}
+2.
+// WeaponScript
+// Token: 0x04003270 RID: 12912
+[Token(Token = "0x4003270")]
+[FieldOffset(Offset = "0x268")]
+protected bool _show;
+Show Weapon:
+1.
+// WeaponScript
+// Token: 0x06002850 RID: 10320 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002850")]
+[Address(RVA = "0x11C3570", Offset = "0x11C3570", VA = "0x11C3570")]
+public void Show()
+{
+}
+2.
+// WeaponScript
+// Token: 0x04003270 RID: 12912
+[Token(Token = "0x4003270")]
+[FieldOffset(Offset = "0x268")]
+protected bool _show;
+Kill Player (Kill All):
+// WeaponScript
+// Token: 0x06002861 RID: 10337 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002861")]
+[Address(RVA = "0x11C5B14", Offset = "0x11C5B14", VA = "0x11C5B14")]
+public void PlayerDeadByMe()
+{
+}
+Switch View (Third Person / First Person):
+// WeaponScript
+// Token: 0x06002839 RID: 10297 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002839")]
+[Address(RVA = "0x11BF718", Offset = "0x11BF718", VA = "0x11BF718", Slot = "5")]
+public virtual void SetView(bool _isThirdPerson)
+{
+}
+Shoot Gun (Auto Fire):
+// WeaponScript
+// Token: 0x0600283B RID: 10299 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x600283B")]
+[Address(RVA = "0x11BEA48", Offset = "0x11BEA48", VA = "0x11BEA48", Slot = "6")]
+public virtual void WeaponShot(GameObject bulletGO, Vector3 hitPoint, DamageMessage dm)
+{
+}
+Weapon Skin (Visual):
+// WeaponScript
+// Token: 0x06002858 RID: 10328 RVA: 0x0000AF08 File Offset: 0x00009108
+[Token(Token = "0x6002858")]
+[Address(RVA = "0x11C54E4", Offset = "0x11C54E4", VA = "0x11C54E4")]
+public int get_currentWeaponSkin()
+{
+	return 0;
+}
+No Shoot Delay:
+1.
+// WeaponScript
+// Token: 0x0400322F RID: 12847
+[Token(Token = "0x400322F")]
+[FieldOffset(Offset = "0x84")]
+public float delayBullet;
+2.
+// WeaponScript
+// Token: 0x0400324F RID: 12879
+[Token(Token = "0x400324F")]
+[FieldOffset(Offset = "0x180")]
+public bool shootDelay;
+
+Shoot Lasers:
+// WeaponScript
+// Token: 0x0400327D RID: 12925
+[Token(Token = "0x400327D")]
+[FieldOffset(Offset = "0x2A5")]
+internal bool isLaser;
+Silent (Stealth):
+// WeaponScript
+// Token: 0x0400327A RID: 12922
+[Token(Token = "0x400327A")]
+[FieldOffset(Offset = "0x2A2")]
+public bool isSilencer;
+Scope:
+1.
+// WeaponScript
+// Token: 0x04003275 RID: 12917
+[Token(Token = "0x4003275")]
+[FieldOffset(Offset = "0x294")]
+public bool sniper;
+2.
+// WeaponScript
+// Token: 0x04003265 RID: 12901
+[Token(Token = "0x4003265")]
+[FieldOffset(Offset = "0x220")]
+public GameObject sniperLens;
+3.
+// WeaponScript
+// Token: 0x04003266 RID: 12902
+[Token(Token = "0x4003266")]
+[FieldOffset(Offset = "0x228")]
+public GameObject sniperScope;
+Change Current Weapon:
+// WeaponScript
+// Token: 0x04003251 RID: 12881
+[Token(Token = "0x4003251")]
+[FieldOffset(Offset = "0x184")]
+[NonSerialized]
+public int weaponId;
+Respawn Wait (Fast Respawn):
+// SurvivalRespawnScript
+// Token: 0x0400312D RID: 12589
+[Token(Token = "0x400312D")]
+[FieldOffset(Offset = "0x24")]
+protected float _startTime;
+Skip Tutorial:
+1.
+// TutorialScript
+// Token: 0x06002826 RID: 10278 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002826")]
+[Address(RVA = "0x16C977C", Offset = "0x16C977C", VA = "0x16C977C")]
+public TutorialScript()
+{
+}
+2.
+// TutorialController
+// Token: 0x06002803 RID: 10243 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002803")]
+[Address(RVA = "0x16C898C", Offset = "0x16C898C", VA = "0x16C898C")]
+public void onCompleted()
+{
+}
+3.
+// TutorialController
+// Token: 0x06002806 RID: 10246 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6002806")]
+[Address(RVA = "0x16C8AF4", Offset = "0x16C8AF4", VA = "0x16C8AF4")]
+private void Start()
+{
+}
+OP Rockets:
+1.
+// RocketScript
+// Token: 0x04002F9C RID: 12188
+[Token(Token = "0x4002F9C")]
+[FieldOffset(Offset = "0x34")]
+public float explosionRadius;
+2.
+// RocketScript
+// Token: 0x04002F99 RID: 12185
+[Token(Token = "0x4002F99")]
+[FieldOffset(Offset = "0x20")]
+public float flySpeed;
+Unix Timestamp (Time Changer):
+// ServerScript
+// Token: 0x06002533 RID: 9523 RVA: 0x0000A950 File Offset: 0x00008B50
+[Token(Token = "0x6002533")]
+[Address(RVA = "0x131E218", Offset = "0x131E218", VA = "0x131E218")]
+public int UnixTime()
+{
+	return 0;
+}
+Add Money:
+// GameParamsScript
+// Token: 0x06001E57 RID: 7767 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E57")]
+[Address(RVA = "0x10BB418", Offset = "0x10BB418", VA = "0x10BB418")]
+public void GetPlayerMoney(GameObject go, string method)
+{
+}
+Add Gold:
+// GameParamsScript
+// Token: 0x06001E66 RID: 7782 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E66")]
+[Address(RVA = "0x10BD428", Offset = "0x10BD428", VA = "0x10BD428")]
+public void giveGold(GiveGoldEnum cs, int gold)
+{
+}
+Money Hack:
+// GameParamsScript
+// Token: 0x04002740 RID: 10048
+[Token(Token = "0x4002740")]
+[FieldOffset(Offset = "0xE0")]
+[Attribute(Name = "RuntimeAttribute", RVA = "0x5D14F4", Offset = "0x5D14F4")]
+public int playerMoney;
+Disable Winrate:
+// GameParamsScript
+// Token: 0x06001E38 RID: 7736 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E38")]
+[Address(RVA = "0x10B86D8", Offset = "0x10B86D8", VA = "0x10B86D8")]
+public void PushWinrate(bool win)
+{
+}
+Send Websocket Request:
+// GameParamsScript
+// Token: 0x06001E16 RID: 7702 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E16")]
+[Address(RVA = "0x10B551C", Offset = "0x10B551C", VA = "0x10B551C")]
+public void Request(ServerRequestCode q, Dictionary<string, string> paramData, [Optional] ServerCallback cb, bool isAsync = false)
+{
+}
+Change Name:
+// GameParamsScript
+// Token: 0x06001E5A RID: 7770 RVA: 0x00002050 File Offset: 0x00000250
+[Token(Token = "0x6001E5A")]
+[Address(RVA = "0x10BBAE0", Offset = "0x10BBAE0", VA = "0x10BBAE0")]
+public void SaveNewName(int id, string newName, ServerCallback cb)
+{
+}
+Clan Spoofer:
+1.
+// GameParamsScript
+// Token: 0x06001E4D RID: 7757 RVA: 0x0000206A File Offset: 0x0000026A
+[Token(Token = "0x6001E4D")]
+[Address(RVA = "0x10BA558", Offset = "0x10BA558", VA = "0x10BA558")]
+public ClanInfo get_clan()
+{
+	return null;
+}
+2.
+// GameParamsScript
+// Token: 0x06001E79 RID: 7801 RVA: 0x000092D0 File Offset: 0x000074D0
+[Token(Token = "0x6001E79")]
+[Address(RVA = "0x10B1E04", Offset = "0x10B1E04", VA = "0x10B1E04")]
+public int get_clanId()
+{
+	return 0;
+}
+Keys:
+// GameParamsScript
+// Token: 0x06001E77 RID: 7799 RVA: 0x000092A0 File Offset: 0x000074A0
+[Token(Token = "0x6001E77")]
+[Address(RVA = "0x10BF060", Offset = "0x10BF060", VA = "0x10BF060")]
+public int get_keyCount()
+{
+	return 0;
+}
+Level Spoofer:
+1.
+// GameParamsScript
+// Token: 0x06001E36 RID: 7734 RVA: 0x00009150 File Offset: 0x00007350
+[Token(Token = "0x6001E36")]
+[Address(RVA = "0x10B6608", Offset = "0x10B6608", VA = "0x10B6608")]
+public int get_playerLevel()
+{
+	return 0;
+}
+2.
+// GameParamsScript
+// Token: 0x04002747 RID: 10055
+[Token(Token = "0x4002747")]
+[FieldOffset(Offset = "0x10C")]
+public int playerExp;
+3.
+// GameParamsScript
+// Token: 0x04002746 RID: 10054
+[Token(Token = "0x4002746")]
+[FieldOffset(Offset = "0x108")]
+public int playerExpPoints;
+
+Name Spoofer:
+// GameParamsScript
+// Token: 0x06001E1D RID: 7709 RVA: 0x0000206A File Offset: 0x0000026A
+[Token(Token = "0x6001E1D")]
+[Address(RVA = "0x10B692C", Offset = "0x10B692C", VA = "0x10B692C")]
+public string get_playerName()
+{
+	return null;
+}
+Rank Spoofer:
+// GameParamsScript
+// Token: 0x06001E23 RID: 7715 RVA: 0x000090C0 File Offset: 0x000072C0
+[Token(Token = "0x6001E23")]
+[Address(RVA = "0x10B6DE8", Offset = "0x10B6DE8", VA = "0x10B6DE8")]
+public int get_playerRank()
+{
+	return 0;
+}
+Rating Spoofer:
+// GameParamsScript
+// Token: 0x06001E37 RID: 7735 RVA: 0x00009168 File Offset: 0x00007368
+[Token(Token = "0x6001E37")]
+[Address(RVA = "0x10B6C78", Offset = "0x10B6C78", VA = "0x10B6C78")]
+public int get_playerRating()
+{
+	return 0;
+}
+Winrate Spoofer:
+// GameParamsScript
+// Token: 0x06001E39 RID: 7737 RVA: 0x00009180 File Offset: 0x00007380
+[Token(Token = "0x6001E39")]
+[Address(RVA = "0x10B87D0", Offset = "0x10B87D0", VA = "0x10B87D0")]
+public float get_playerWinrate()
+{
+	return 0f;
+}
+Clan Create Price (Free Create Clan):
+// GameParamsScript
+// Token: 0x040027A0 RID: 10144
+[Token(Token = "0x40027A0")]
+[FieldOffset(Offset = "0x388")]
+[Attribute(Name = "HeaderAttribute", RVA = "0x5D1768", Offset = "0x5D1768")]
+public int clanCreatePrice;
+Clothes Price (Free Clothes):
+// GameParamsScript
+// Token: 0x04002768 RID: 10088
+[Token(Token = "0x4002768")]
+[FieldOffset(Offset = "0x240")]
+public int[] clothesPrice;
+Play Competitive:
+// GameParamsScript
+// Token: 0x04002787 RID: 10119
+[Token(Token = "0x4002787")]
+[FieldOffset(Offset = "0x2FC")]
+public int levelToPlayCompetitive;
+Sensitivity:
+// GameParamsScript
+// Token: 0x04002737 RID: 10039
+[Token(Token = "0x4002737")]
+[FieldOffset(Offset = "0x9C")]
+[HideInInspector]
+public float mouseSens;
+Rigid Force Multiplier:
+// GameParamsScript
+// Token: 0x0400279D RID: 10141
+[Token(Token = "0x400279D")]
+[FieldOffset(Offset = "0x37C")]
+public float RigidForceMul;
+Skin Price (Free Skins):
+// GameParamsScript
+// Token: 0x04002760 RID: 10080
+[Token(Token = "0x4002760")]
+[FieldOffset(Offset = "0x200")]
+public PriceValue[] skinPrice;
+VIP Price (Free VIP):
+// GameParamsScript
+// Token: 0x04002764 RID: 10084
+[Token(Token = "0x4002764")]
+[FieldOffset(Offset = "0x220")]
+public int[,] vipPrice;
+VIP Bonus (OP VIP):
+// GameParamsScript
+// Token: 0x04002765 RID: 10085
+[Token(Token = "0x4002765")]
+[FieldOffset(Offset = "0x228")]
+public int vipBonus;
+Custom Team Color:
+// GameParamsScript
+// Token: 0x040027A1 RID: 10145
+[Token(Token = "0x40027A1")]
+[FieldOffset(Offset = "0x390")]
+public Color[] teamColor;

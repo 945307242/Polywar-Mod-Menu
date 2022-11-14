@@ -639,7 +639,7 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("168_CollapseAdd_Button_Ban Player"),
             OBFUSCATE("Category_Miscellaneous"),
             OBFUSCATE("169_CheckBox_True_Antiban"), //Done
-            OBFUSCATE("170_CheckBox_Bypass Force Update"), //YandexAppMetricaConfig.AppVersion
+            OBFUSCATE("170_CheckBox_True_Bypass Force Update"), //YandexAppMetricaConfig.AppVersion
             OBFUSCATE("171_CheckBox_True_No Ads"), //Done
             OBFUSCATE("172_CheckBox_60 FPS"),
             OBFUSCATE("173_CollapseAdd_InputValue_Speedhack"),
