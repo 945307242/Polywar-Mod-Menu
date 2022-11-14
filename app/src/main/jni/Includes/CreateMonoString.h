@@ -18,12 +18,7 @@ typedef struct _monoString {
     }
 } monoString;
 
-#if defined(__aarch64__)
-	monoString *CreateMonoString(const char *str) {
-    monoString *(*String_CreateString)(void *instance, const char *str) = (monoString *(*)(void *, const char *))getAbsoluteAddress("libil2cpp.so", 0xCA9A88);
-	return String_CreateString(NULL, str); }
-#else
-	monoString *CreateMonoString(const char *str) {
-    monoString *(*String_CreateString)(void *instance, const char *str) = (monoString *(*)(void *, const char *))getAbsoluteAddress("libil2cpp.so", 0xA3BCEC);
-	return String_CreateString(NULL, str); }
-#endif
+monoString *CreateMonoString(const char *str) {
+    monoString *(*String_CreateString)(void *instance, const char *str) = (monoString *(*)(void *, const char *))getAbsoluteAddress("libil2cpp.so", Offsets::Methods.String_CreateString);
+    return String_CreateString(NULL, str);
+}

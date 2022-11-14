@@ -52,6 +52,7 @@ Vector3 GetMyPosition();
 
 // Init Hooks
 
+void (*ChatMessage)(void *instance, monoString * message);
 void (*ChatPlayerMessage)(void *instance, monoString * message,bool team);
 void (*HideWeapon)(void *instance, bool b);
 void (*UseGrenade)(void *instance);
@@ -63,9 +64,34 @@ void(*old_PlayerScript_Update)(void *instance);
 void PlayerScript_Update(void *instance) {
     if (instance != NULL) {
         if (updatehooksready) {
-            if (Features::Match.isChatSpam) {
-                test = "PlayerScript_Update Chat Spam";
-                ChatPlayerMessage(instance, CreateMonoString(ChatSpamMessage),false);
+            if (Features::Player.isInfiniteHealth) {
+                SetObscuredInt((uint64_t) instance + Offsets::Fields.Health, 100);
+            }
+            if (Features::Player.isInfiniteArmor) {
+                SetObscuredInt((uint64_t) instance + Offsets::Fields.Armor, 100);
+            }
+            if (Features::Player.Button_isHeal) {
+                    SetObscuredInt((uint64_t) instance + Offsets::Fields.Health, 100);
+                Features::Player.Button_isHeal = false;
+            }
+            if (Features::Player.Button_isSwitchTeam) {
+                    if (*(int *) ((uint64_t) instance + Offsets::Fields.Team) == 1) {
+                        *(int *) ((uint64_t) instance + Offsets::Fields.Team) = 2;
+                    } else {
+                        *(int *) ((uint64_t) instance + Offsets::Fields.Team) = 1;
+                    }
+                Features::Player.Button_isSwitchTeam = false;
+            }
+            if (Features::Player.isNoTeam) {
+                *(int *) ((uint64_t) instance + Offsets::Fields.Team) = 0;
+            }
+            if (Features::Match.isChatSpamV1) {
+                test = "PlayerScript_Update Chat Spam V1";
+                ChatMessage(instance, CreateMonoString(Features::Match.InputText_ChatSpamMessage.c_str()));
+            }
+            if (Features::Match.isChatSpamV2) {
+                test = "PlayerScript_Update Chat Spam V2";
+                ChatPlayerMessage(instance, CreateMonoString(Features::Match.InputText_ChatSpamMessage.c_str()),false);
             }
             if (Features::Respawning.Button_isRespawn) {
                 Respawn(instance);
@@ -77,6 +103,10 @@ void PlayerScript_Update(void *instance) {
             if (Features::Movement.Teleport_Button_isTeleport) {
                 Teleport(instance,Vector3(float(Features::Movement.Teleport_InputValue_X),float(Features::Movement.Teleport_InputValue_Y),float(Features::Movement.Teleport_InputValue_Z)),Vector3(0.0f, 0.0f, 0.0f));
                 Features::Movement.Teleport_Button_isTeleport = false;
+            }
+            if (Features::Currency.Vip_Button_isBuyVipPermanent) {
+                BuyVIP(instance,1);
+                Features::Currency.Vip_Button_isBuyVipPermanent = false;
             }
         }
     }
@@ -125,6 +155,18 @@ bool PlayerScript_get_throwingGrenade(void *instance) {
         }
     }
     old_PlayerScript_get_throwingGrenade(instance);
+}
+
+monoString *(*old_PlayerScript_get_playerName)(void *instance);
+monoString *PlayerScript_get_playerName(void *instance) {
+    if (instance != NULL) {
+        if (updatehooksready) {
+            if (Features::Player.updateInputText_NameSpoofer) {
+                return CreateMonoString(Features::Player.InputText_NameSpoofer.c_str());
+            }
+        }
+    }
+    old_PlayerScript_get_playerName(instance);
 }
 
 void(*old_WeaponScript_Update)(void *instance);
@@ -199,8 +241,8 @@ void PlayerController_Update(void *instance) {
     old_PlayerController_Update(instance);
 }
 
-void(*old_XAds_Play)(void *instance, monostring name, float deltaVideoTime, monostring placement);
-void XAds_Play(void *instance, monostring name, float deltaVideoTime, monostring placement) {
+void(*old_XAds_Play)(void *instance, monoString * name, float deltaVideoTime, monoString * placement);
+void XAds_Play(void *instance, monoString * name, float deltaVideoTime, monoString * placement) {
     if (instance != NULL) {
         if (updatehooksready) {
             if (Features::Miscellaneous.isNoAds) {
@@ -259,6 +301,18 @@ void GameParamsScript_BanPlayer(void *instance) {
     old_GameParamsScript_BanPlayer(instance);
 }
 
+bool(*old_BattleControllerScript_get_isSpectator)(void *instance);
+bool BattleControllerScript_get_isSpectator(void *instance) {
+    if (instance != NULL) {
+        if (updatehooksready) {
+            if (Features::Player.isSpectatorMode) {
+                return false;
+            }
+        }
+    }
+    old_BattleControllerScript_get_isSpectator(instance);
+}
+
 // Custom Functions
 
 Vector3 GetMyPosition() {
@@ -290,6 +344,9 @@ void *hack_thread(void *) {
     //PlayerScript.Update
     HOOK_LIB("libil2cpp.so", Offset2String(Offsets::Methods.PlayerScript_Update), PlayerScript_Update, old_PlayerScript_Update);
 
+    //PlayerScript.ChatMessage
+    ChatMessage = (void (*)(void *, monoString *)) getAbsoluteAddress("libil2cpp.so",Offsets::Methods.PlayerScript_ChatMessage);
+
     //PlayerScript.ChatPlayerMessage
     ChatPlayerMessage = (void (*)(void *, monoString *, bool)) getAbsoluteAddress("libil2cpp.so",Offsets::Methods.PlayerScript_ChatPlayerMessage);
 
@@ -298,6 +355,9 @@ void *hack_thread(void *) {
 
     //PlayerScript.get_throwingGrenade
     HOOK_LIB("libil2cpp.so", Offset2String(Offsets::Methods.PlayerScript_get_throwingGrenade), PlayerScript_get_throwingGrenade, old_PlayerScript_get_throwingGrenade);
+
+    //PlayerScript.get_playerName
+    HOOK_LIB("libil2cpp.so", Offset2String(Offsets::Methods.PlayerScript_get_playerName), PlayerScript_get_playerName, old_PlayerScript_get_playerName);
 
     //PlayerScript.Respawn
     Respawn = (void (*)(void *)) getAbsoluteAddress("libil2cpp.so", Offsets::Methods.PlayerScript_Respawn);
@@ -346,6 +406,9 @@ void *hack_thread(void *) {
     //SocialNetBase.BuyVIP
     BuyVIP = (void (*)(void *, int)) getAbsoluteAddress("libil2cpp.so",  Offsets::Methods.SocialNetBase_BuyVIP);
 
+    //BattleControllerScript.get_isSpectator
+    HOOK_LIB("libil2cpp.so", Offset2String(Offsets::Methods.BattleControllerScript_get_isSpectator), BattleControllerScript_get_isSpectator, old_BattleControllerScript_get_isSpectator);
+
     hackthreaddone = 2;
     return NULL;
 }
@@ -361,17 +424,17 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
     jobjectArray ret;
 
     const char *features[] = {
-            OBFUSCATE("RichTextView_Polywar V1.1 Mod Menu By HorridModz\nDiscord: User123456789#6424"),
-            OBFUSCATE("RichTextView_WARNING:\nI do not want to cause too much damage to the game devs or other players. If this mod menu is abused too much, I will disable it so the game is not ruined."),
+            OBFUSCATE("RichTextView_Polywar V1.1 Mod Menu By HorridModz<br /><font color='gray'><b>Discord: User123456789#6424</b></font>"),
+            OBFUSCATE("RichTextView_<font color='red'><b>Warning:</b></font><br />I do not want to cause too much damage to the game devs or other players. If this mod menu is abused too much, I will disable it so the game is not ruined."),
             OBFUSCATE("Category_Currency"),
             OBFUSCATE("Collapse_VIP"),
-            OBFUSCATE("0_CollapseAdd_Toggle_VIP"),
-            OBFUSCATE("1_CollapseAdd_Button_Buy VIP (Permanent)"),
+            OBFUSCATE("0_CollapseAdd_Toggle_VIP"), //Done
+            OBFUSCATE("1_CollapseAdd_Button_Buy VIP (Permanent)"), //Done
             OBFUSCATE("Category_Store"),
-            OBFUSCATE("2_Toggle_Free Shopping"),
+            OBFUSCATE("2_Toggle_Free Shopping"), //Done
             //OBFUSCATE("2_Toggle_Free In-app Purchases"), //Could not find a way to implement :(
             OBFUSCATE("Category_Battle Pass"),
-            OBFUSCATE("3_Button_Unlock Premium Battle Pass (Temperary"),
+            OBFUSCATE("3_Button_Unlock Premium Battle Pass (Temperary"), //Done
             OBFUSCATE("4_Button_Reset Battle Pass Rewards"),
             OBFUSCATE("5_Toggle_Infinite Battle Pass Rewards"), //Spam collect battle pass rewards - they never stop letting you collect them
             OBFUSCATE("6_Button_Claim All Battle Pass Rewards"), //Claim all unlocked battle pass rewards
@@ -390,9 +453,9 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("Collapse_Skins"),
             OBFUSCATE("Collapse_Weapons"),
             OBFUSCATE("Category_Player"),
-            OBFUSCATE("14_Toggle_Godmode V1"), //PlayerScript.Die
-            OBFUSCATE("15_Toggle_Infinite Health"),
-            OBFUSCATE("16_Toggle_Infinite Armor"),
+            OBFUSCATE("14_Toggle_Godmode V1"), //Done
+            OBFUSCATE("15_Toggle_Infinite Health"), //Done
+            OBFUSCATE("16_Toggle_Infinite Armor"), //Done
             OBFUSCATE("Collapse_Regeneration"),
             OBFUSCATE("17_CollapseAdd_Toggle_Health Regen"), //if false set regen to 0
             OBFUSCATE("18_CollapseAdd_SeekBar_Health Regen_0_1000"),
@@ -400,7 +463,7 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("20_CollapseAdd_SeekBar_Armor Regen_0_2000"),
             OBFUSCATE("21_CollapseAdd_SeekBar_Regen Interval (Seconds)_0_60"), // PlayerConfig.regenDelay,  PlayerConfig.regenfrequencey
             OBFUSCATE("22_CollapseAdd_SeekBar_Regen Interval (Miliseconds)_0_2200"), // PlayerConfig.regenDelay,  PlayerConfig.regenfrequencey
-            OBFUSCATE("23_Button_Heal"),
+            OBFUSCATE("23_Button_Heal"), //Done
             OBFUSCATE("24_Toggle_Thorns"), //PlayerScript.ApplyDamage
             OBFUSCATE("25_SeekBar_Thorns Damage_0_1000"), //PlayerScript.ApplyDamage // when enemy hits you they take set amount of damage back
             OBFUSCATE("26_Toggle_Reflect Damage"), //PlayerScript.ApplyDamage // when you are shot, the enemy that shot you takes damage instead of you
@@ -410,54 +473,54 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("29_CollapseAdd_SeekBar_Heal_0_2900"), //PlayerScript.ApplyDamage
             OBFUSCATE("30_CollapseAdd_CheckBox_Enable Force Field"),
             OBFUSCATE("31_Toggle_Danger Zone Invincibility"),
-            OBFUSCATE("32_Button_Switch Team"), //PlayerScript.getTeam
-            OBFUSCATE("33_CheckBox_No Team"),
+            OBFUSCATE("32_Button_Switch Team"), //Done
+            OBFUSCATE("33_CheckBox_No Team"), //Done
             OBFUSCATE("34_CheckBox_Both Teams"),
             OBFUSCATE("35_Toggle_No Item Cooldown"),
-            OBFUSCATE("36_Toggle_Spectator Mode"),
-            OBFUSCATE("37_InputText_Name Spoofer"), //PlayerScript.playerName
+            OBFUSCATE("36_Toggle_Spectator Mode"), //Done
+            OBFUSCATE("37_InputText_Name Spoofer"), //Done
             OBFUSCATE("Category_Weapons"),
-            OBFUSCATE("38_Toggle_Damage"),
-            OBFUSCATE("39_SeekBar_Damage_0_1000"),
-            OBFUSCATE("40_Toggle_Rapid Fire"),
+            OBFUSCATE("38_Toggle_Damage"), //Done
+            OBFUSCATE("39_SeekBar_Damage_0_1000"), //Done
+            OBFUSCATE("40_Toggle_Rapid Fire"), //Done
             OBFUSCATE("41_Toggle_Fire Rate (Not Implemented)"),
             OBFUSCATE("42_SeekBar_Fire Rate (Not Implemented)_1_1000"),
             OBFUSCATE("43_Toggle_Auto Fire"),
             OBFUSCATE("44_Toggle_Ammo"), //bullets, clips
             OBFUSCATE("45_SeekBar_Ammo_1_1000"), //bullets, clips
-            OBFUSCATE("46_Toggle_Clip Size"),
-            OBFUSCATE("47_SeekBar_Clip Size_1_1000"),
-            OBFUSCATE("48_Toggle_Accuracy"),
-            OBFUSCATE("49_Toggle_No Shoot Delay"),
+            OBFUSCATE("46_Toggle_Clip Size"), //Done
+            OBFUSCATE("47_SeekBar_Clip Size_1_1000"), //Done
+            OBFUSCATE("48_Toggle_Accuracy"),  //Done
+            OBFUSCATE("49_Toggle_No Shoot Delay"), //Done
             OBFUSCATE("50_Toggle_Shoot Through Walls"),
-            OBFUSCATE("51_Toggle_Shoot Lasers"),
-            OBFUSCATE("52_Toggle_Silent"),
-            OBFUSCATE("53_Toggle_No Recoil"),
-            OBFUSCATE("54_Toggle_Hide Weapon"),
+            OBFUSCATE("51_Toggle_Shoot Lasers"), //Done
+            OBFUSCATE("52_Toggle_Silent"), //Done
+            OBFUSCATE("53_Toggle_No Recoil"), //Done
+            OBFUSCATE("54_Toggle_Hide Weapon"), //Done
             OBFUSCATE("55_Toggle_Scope Zoom"),
             OBFUSCATE("56_SeekBar_Scope Zoom_1_100"),
-            OBFUSCATE("Category_Aimbot"),
-            OBFUSCATE("57_Toggle_Aimbot"),
-            OBFUSCATE("58_Toggle_OP Aim Assist"), //PlayerConfig.autoaimForce
-            OBFUSCATE("59_Toggle_Auto Fire"),
-            OBFUSCATE("60_Toggle_Silent Aim"),
-            OBFUSCATE("61_SeekBar_Silent Aim Radius_1_10000"),
-            OBFUSCATE("Category_Kill Players"),
-            OBFUSCATE("62_Toggle_Telekill"),
-            OBFUSCATE("63_Toggle_Masskill"),
-            OBFUSCATE("64_Button_Kill All"),
-            OBFUSCATE("Collapse_Spam Kill Delay"),
-            OBFUSCATE("65_CollapseAdd_SeekBar_Minutes_0_60"),
-            OBFUSCATE("66_CollapseAdd_SeekBar_Seconds_0_60"),
-            OBFUSCATE("67_CollapseAdd_SeekBar_Miliseconds_0_1000"),
-            OBFUSCATE("68_Toggle_Spam Kill All"),
-            OBFUSCATE("69_InputText_Player To Kill (Case Sensitive!)"),
-            OBFUSCATE("70_Button_Kill Player"),
-            OBFUSCATE("71_Toggle_Spam Kill Player"),
             OBFUSCATE("Category_Grenades"),
-            OBFUSCATE("72_Toggle_Infinite Grenades"), //PlayerScript.frags
-            OBFUSCATE("73_Toggle_Grenade Spam"),
-            OBFUSCATE("74_Toggle_No Grenade Animation"), //PlayerScript.throwingGrenade
+            OBFUSCATE("57_Toggle_Infinite Grenades"), //Done
+            OBFUSCATE("58_Toggle_Grenade Spam"),
+            OBFUSCATE("59_Toggle_No Grenade Animation"), //Done
+            OBFUSCATE("Category_Aimbot"),
+            OBFUSCATE("60_Toggle_Aimbot"),
+            OBFUSCATE("61_Toggle_OP Aim Assist"), //PlayerConfig.autoaimForce
+            OBFUSCATE("62_Toggle_Auto Fire"),
+            OBFUSCATE("63_Toggle_Silent Aim"),
+            OBFUSCATE("64_SeekBar_Silent Aim Radius_1_10000"),
+            OBFUSCATE("Category_Kill Players"),
+            OBFUSCATE("65_Toggle_Telekill"),
+            OBFUSCATE("66_Toggle_Masskill"),
+            OBFUSCATE("67_Button_Kill All"),
+            OBFUSCATE("Collapse_Spam Kill Delay"),
+            OBFUSCATE("68_CollapseAdd_SeekBar_Minutes_0_60"),
+            OBFUSCATE("69_CollapseAdd_SeekBar_Seconds_0_60"),
+            OBFUSCATE("70_CollapseAdd_SeekBar_Miliseconds_0_1000"),
+            OBFUSCATE("71_Toggle_Spam Kill All"),
+            OBFUSCATE("72_InputText_Player To Kill (Case Sensitive!)"),
+            OBFUSCATE("73_Button_Kill Player"),
+            OBFUSCATE("74_Toggle_Spam Kill Player"),
             OBFUSCATE("Category_Vision"),
             OBFUSCATE("Collapse_ESP"),
             OBFUSCATE("75_CollapseAdd_Toggle_Player Lines"),
@@ -477,39 +540,39 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("87_Toggle_Anti Camera Shake"), //PlayerScript.ShakeCamera
             OBFUSCATE("Category_Movement"),
             OBFUSCATE("88_Toggle_Fly"),
-            OBFUSCATE("89_Toggle_Infinite Jump"), //PlayerController.CanJump
-            OBFUSCATE("90_Toggle_Jump Height"), //PlayerController.jumpForce
-            OBFUSCATE("91_SeekBar_Jump Height_0_1000"), //PlayerController.jumpForce
+            OBFUSCATE("89_Toggle_Infinite Jump"), // (NOT IMPLEMENTED) PlayerController.isGrounded
+            OBFUSCATE("90_Toggle_Jump Height"), // (NOT IMPLEMENTED) PlayerController.jumpForce
+            OBFUSCATE("91_SeekBar_Jump Height_0_1000"), // (NOT IMPLEMENTED) PlayerController.jumpForce
             OBFUSCATE("92_Toggle_Inverted Jump"), //Jumping makes you go down instead of up!
             OBFUSCATE("93_Toggle_Bunny Hop"),
-            OBFUSCATE("94_Toggle_Walk Speed"), //PlayerController.walkSpeed
-            OBFUSCATE("95_SeekBar_Walk Speed_0_500"), //PlayerController.walkSpeed
-            OBFUSCATE("96_Toggle_Run Speed"), //PlayerController.runSpeed
-            OBFUSCATE("97_SeekBar_Run Speed_0_500"), //PlayerController.runSpeed
-            OBFUSCATE("98_Toggle_Sprint Speed"), //PlayerController.sprintSpeed
-            OBFUSCATE("99_SeekBar_Sprint Speed_0_500"), //PlayerController.sprintSpeed
-            OBFUSCATE("100_Toggle_Auto Sprint"), //PlayerScript._sprint
-            OBFUSCATE("101_Toggle_No Clip"), //CharacterController.DetectCollisions
+            OBFUSCATE("94_Toggle_Walk Speed"), // (NOT IMPLEMENTED) PlayerController.walkSpeed
+            OBFUSCATE("95_SeekBar_Walk Speed_0_500"), // (NOT IMPLEMENTED) PlayerController.walkSpeed
+            OBFUSCATE("96_Toggle_Run Speed"), // (NOT IMPLEMENTED) PlayerController.runSpeed
+            OBFUSCATE("97_SeekBar_Run Speed_0_500"), // (NOT IMPLEMENTED) PlayerController.runSpeed
+            OBFUSCATE("98_Toggle_Sprint Speed"), // (NOT IMPLEMENTED) PlayerController.sprintSpeed
+            OBFUSCATE("99_SeekBar_Sprint Speed_0_500"), // (NOT IMPLEMENTED) PlayerController.sprintSpeed
+            OBFUSCATE("100_Toggle_Auto Sprint"), // (NOT IMPLEMENTED) PlayerScript._sprint
+            OBFUSCATE("101_Toggle_No Clip"), //Done
             OBFUSCATE("Collapse_Gravity"),
             OBFUSCATE("102_CollapseAdd_Toggle_Gravity Strength"),
             OBFUSCATE("103_CollapseAdd_SeekBar_Gravity_0_1000"),
             OBFUSCATE("104_CollapseAdd_Toggle_Inverted Gravity"),
             OBFUSCATE("105_Toggle_Underwater"),
-            OBFUSCATE("Collapse_Teleport"),
-            OBFUSCATE("106_CollapseAdd_InputValue_X"),
-            OBFUSCATE("107_CollapseAdd_InputValue_Y"),
-            OBFUSCATE("108_CollapseAdd_InputValue_Z"),
-            OBFUSCATE("109_CollapseAdd_Button_Teleport"),
+            OBFUSCATE("Collapse_Teleport"), //Done
+            OBFUSCATE("106_CollapseAdd_InputValue_X"), //Done
+            OBFUSCATE("107_CollapseAdd_InputValue_Y"), //Done
+            OBFUSCATE("108_CollapseAdd_InputValue_Z"), //Done
+            OBFUSCATE("109_CollapseAdd_Button_Teleport"), //Done
             OBFUSCATE("Category_Respawning"),
-            OBFUSCATE("110_Button_Respawn"),
+            OBFUSCATE("110_Button_Respawn"), //Done
             OBFUSCATE("111_Toggle_Immediate Respawn"), //PlayerScript.autoRespawn,  PlayerConfig.respawnTime
-            OBFUSCATE("112_Toggle_Respawn In Place"),
-            OBFUSCATE("113_Toggle_Don't Respawn"),
-            OBFUSCATE("Collapse_Custom Respawn Positon"),
-            OBFUSCATE("114_CollapseAdd_InputValue_X"),
-            OBFUSCATE("115_CollapseAdd_InputValue_Y"),
-            OBFUSCATE("116_CollapseAdd_InputValue_Z"),
-            OBFUSCATE("117_CollapseAdd_CheckBox_Custom Respawn Position"),
+            OBFUSCATE("112_Toggle_Respawn In Place"), //Done
+            OBFUSCATE("113_Toggle_Don't Respawn"), //Done
+            OBFUSCATE("Collapse_Custom Respawn Positon"), //Done
+            OBFUSCATE("114_CollapseAdd_InputValue_X"), //Done
+            OBFUSCATE("115_CollapseAdd_InputValue_Y"), //Done
+            OBFUSCATE("116_CollapseAdd_InputValue_Z"), //Done
+            OBFUSCATE("117_CollapseAdd_CheckBox_Custom Respawn Position"), //Done
             OBFUSCATE("Category_Vehicles"),
             OBFUSCATE("118_Toggle_Vehicle Infinite Health"), //TransportScript.Health or TransportScropt.transportHealth
             OBFUSCATE("119_Toggle_Vehicle Godmode"), //TransportScript.Die
@@ -543,18 +606,47 @@ jobjectArray GetFeatureList(JNIEnv *env, jobject context) {
             OBFUSCATE("139_CollapseAdd_InputText_Name"),
             OBFUSCATE("140_CollapseAdd_Button_Add Bot"),
             OBFUSCATE("Category_Match"),
-            OBFUSCATE("141_Toggle_Chat Spam"),
+            OBFUSCATE("141_InputText_Chat Spam Message"), //Done
+            OBFUSCATE("142_Toggle_Chat Spam V1"), //Done
+            OBFUSCATE("143_Toggle_Chat Spam V2"), //Done
             OBFUSCATE("Collapse_Match Time"),
-            OBFUSCATE("142_CollapseAdd_InputValue_Hours"),
-            OBFUSCATE("143_CollapseAdd_InputValue_Minutes"),
-            OBFUSCATE("144_CollapseAdd_InputValue_Seconds"),
-            OBFUSCATE("145_CollapseAdd_Button_Set Time"),
-            OBFUSCATE("146_CollapseAdd_CheckBox_Freeze Match Tine"),
+            OBFUSCATE("144_CollapseAdd_InputValue_Hours"),
+            OBFUSCATE("145_CollapseAdd_InputValue_Minutes"),
+            OBFUSCATE("146_CollapseAdd_InputValue_Seconds"),
+            OBFUSCATE("147_CollapseAdd_Button_Set Time"),
+            OBFUSCATE("148_CollapseAdd_InputValue_Match Speed Multiplier"),
+            OBFUSCATE("149_CollapseAdd_Toggle_Match Speed Multiplier"),
+            OBFUSCATE("150_CollapseAdd_CheckBox_Freeze Match Time"),
+            OBFUSCATE("151_Toggle_Lock Lobby (Disable Joining)"),
+            OBFUSCATE("152_Button_Kick All Players"),
+            OBFUSCATE("Category_Manipulate Player"),
+            OBFUSCATE("153_InputText_Player Name"),
+            OBFUSCATE("154_InputValue_Score"),
+            OBFUSCATE("155_Button_Set Score"),
+            OBFUSCATE("156_InputValue_Kills"),
+            OBFUSCATE("157_Button_Set Kills"),
+            OBFUSCATE("158_Button_Switch Player Team"),
+            OBFUSCATE("159_Button_Heal Player"),
+            OBFUSCATE("160_Button_Kill Player"),
+            OBFUSCATE("Collapse_Teleport Player"),
+            OBFUSCATE("161_CollapseAdd_InputValue_X"),
+            OBFUSCATE("162_CollapseAdd_InputValue_Y"),
+            OBFUSCATE("163_CollapseAdd_InputValue_Z"),
+            OBFUSCATE("164_CollapseAdd_Button_Teleport Player"),
+            OBFUSCATE("165_CollapseAdd_Button_Teleport Player To Me"),
+            OBFUSCATE("166_CheckBox_Freeze Player"),
+            OBFUSCATE("167_Button_Kick Player"),
+            OBFUSCATE("168_CollapseAdd_Button_Ban Player"),
             OBFUSCATE("Category_Miscellaneous"),
-            OBFUSCATE("147_CheckBox_True_Antiban"),
-            OBFUSCATE("148_CheckBox_Bypass Force Update"), //YandexAppMetricaConfig.AppVersion
-            OBFUSCATE("149_CheckBox_True_No Ads"),
-            OBFUSCATE("150_CheckBox_60 FPS"),
+            OBFUSCATE("169_CheckBox_True_Antiban"), //Done
+            OBFUSCATE("170_CheckBox_Bypass Force Update"), //YandexAppMetricaConfig.AppVersion
+            OBFUSCATE("171_CheckBox_True_No Ads"), //Done
+            OBFUSCATE("172_CheckBox_60 FPS"),
+            OBFUSCATE("173_CollapseAdd_InputValue_Speedhack"),
+            OBFUSCATE("174_CollapseAdd_Toggle_Speedhack"),
+            OBFUSCATE("Collapse_Ban Player"),
+            OBFUSCATE("175_CollapseAdd_InputValue_Player ID"),
+            OBFUSCATE("176_CollapseAdd_Button_Ban Player"),
             OBFUSCATE("Category_About"),
             OBFUSCATE("ButtonLink_Mod Menu Github Page_https://github.com/HorridModz/Polywar-Mod-Menu"),
             OBFUSCATE("Collapse_My Socials"),
@@ -834,85 +926,85 @@ void Changes(JNIEnv *env, jclass clazz, jobject obj,
 		case 56:
 			Features::Weapons.SetSeekBar_ScopeZoom(value);
 			break;
+		//Grenades
+
+		//Infinite Grenades
+		case 57:
+			Features::Grenades.Toggle_InfiniteGrenades();
+			break;
+		//Grenade Spam
+		case 58:
+			Features::Grenades.Toggle_GrenadeSpam();
+			break;
+		//No Grenade Animation
+		case 59:
+			Features::Grenades.Toggle_NoGrenadeAnimation();
+			break;
 		//Aimbot
 
 		//Aimbot
-		case 57:
+		case 60:
 			Features::Aimbot.Toggle_Aimbot();
 			break;
 		//OP Aim Assist
-		case 58:
+		case 61:
 			Features::Aimbot.Toggle_OpAimAssist();
 			break;
 		//Auto Fire
-		case 59:
+		case 62:
 			Features::Aimbot.Toggle_AutoFire();
 			break;
 		//Silent Aim
-		case 60:
+		case 63:
 			Features::Aimbot.Toggle_SilentAim();
 			break;
 		//Silent Aim Radius
-		case 61:
+		case 64:
 			Features::Aimbot.SetSeekBar_SilentAimRadius(value);
 			break;
 		//Kill Players
 
 		//Telekill
-		case 62:
+		case 65:
 			Features::KillPlayers.Toggle_Telekill();
 			break;
 		//Masskill
-		case 63:
+		case 66:
 			Features::KillPlayers.Toggle_Masskill();
 			break;
 		//Kill All
-		case 64:
+		case 67:
 			Features::KillPlayers.Button_KillAll();
 			break;
 		//Spam Kill All
-		case 68:
+		case 71:
 			Features::KillPlayers.Toggle_SpamKillAll();
 			break;
 		//Player To Kill (Case Sensitive!)
-		case 69:
+		case 72:
 			Features::KillPlayers.SetInputText_PlayerToKillCaseSensitive(std::to_string(value));
 			break;
 		//Kill Player
-		case 70:
+		case 73:
 			Features::KillPlayers.Button_KillPlayer();
 			break;
 		//Spam Kill Player
-		case 71:
+		case 74:
 			Features::KillPlayers.Toggle_SpamKillPlayer();
 			break;
 		//Collapse Spam Kill Delay
 
 		//Minutes
-		case 65:
+		case 68:
 			Features::KillPlayers.SpamKillDelay_SetSeekBar_Minutes(value);
 			break;
 		//Seconds
-		case 66:
+		case 69:
 			Features::KillPlayers.SpamKillDelay_SetSeekBar_Seconds(value);
 			break;
 		//Miliseconds
-		case 67:
+		case 70:
 			Features::KillPlayers.SpamKillDelay_SetSeekBar_Miliseconds(value);
-			break;
-		//Grenades
-
-		//Infinite Grenades
-		case 72:
-			Features::Grenades.Toggle_InfiniteGrenades();
-			break;
-		//Grenade Spam
-		case 73:
-			Features::Grenades.Toggle_GrenadeSpam();
-			break;
-		//No Grenade Animation
-		case 74:
-			Features::Grenades.Toggle_NoGrenadeAnimation();
 			break;
 		//Vision
 		//Collapse ESP
@@ -1215,49 +1307,161 @@ void Changes(JNIEnv *env, jclass clazz, jobject obj,
 			break;
 		//Match
 
-		//Chat Spam
+		//Chat Spam Message
 		case 141:
-			Features::Match.Toggle_ChatSpam();
+			Features::Match.SetInputText_ChatSpamMessage(std::to_string(value));
+			break;
+		//Chat Spam V1
+		case 142:
+			Features::Match.Toggle_ChatSpamV1();
+			break;
+		//Chat Spam V2
+		case 143:
+			Features::Match.Toggle_ChatSpamV2();
+			break;
+		//Lock Lobby (Disable Joining)
+		case 151:
+			Features::Match.Toggle_LockLobbyDisableJoining();
+			break;
+		//Kick All Players
+		case 152:
+			Features::Match.Button_KickAllPlayers();
 			break;
 		//Collapse Match Time
 
 		//Hours
-		case 142:
+		case 144:
 			Features::Match.MatchTime_SetInputValue_Hours(value);
 			break;
 		//Minutes
-		case 143:
+		case 145:
 			Features::Match.MatchTime_SetInputValue_Minutes(value);
 			break;
 		//Seconds
-		case 144:
+		case 146:
 			Features::Match.MatchTime_SetInputValue_Seconds(value);
 			break;
 		//Set Time
-		case 145:
+		case 147:
 			Features::Match.MatchTime_Button_SetTime();
 			break;
-		//Freeze Match Tine
-		case 146:
-			Features::Match.MatchTime_CheckBox_FreezeMatchTine();
+		//Match Speed Multiplier
+		case 148:
+			Features::Match.MatchTime_SetInputValue_MatchSpeedMultiplier(value);
+			break;
+		//Match Speed Multiplier
+		case 149:
+			Features::Match.MatchTime_Toggle_MatchSpeedMultiplier();
+			break;
+		//Freeze Match Time
+		case 150:
+			Features::Match.MatchTime_CheckBox_FreezeMatchTime();
+			break;
+		//Manipulate Player
+
+		//Player Name
+		case 153:
+			Features::ManipulatePlayer.SetInputText_PlayerName(std::to_string(value));
+			break;
+		//Score
+		case 154:
+			Features::ManipulatePlayer.SetInputValue_Score(value);
+			break;
+		//Set Score
+		case 155:
+			Features::ManipulatePlayer.Button_SetScore();
+			break;
+		//Kills
+		case 156:
+			Features::ManipulatePlayer.SetInputValue_Kills(value);
+			break;
+		//Set Kills
+		case 157:
+			Features::ManipulatePlayer.Button_SetKills();
+			break;
+		//Switch Player Team
+		case 158:
+			Features::ManipulatePlayer.Button_SwitchPlayerTeam();
+			break;
+		//Heal Player
+		case 159:
+			Features::ManipulatePlayer.Button_HealPlayer();
+			break;
+		//Kill Player
+		case 160:
+			Features::ManipulatePlayer.Button_KillPlayer();
+			break;
+		//Freeze Player
+		case 166:
+			Features::ManipulatePlayer.CheckBox_FreezePlayer();
+			break;
+		//Kick Player
+		case 167:
+			Features::ManipulatePlayer.Button_KickPlayer();
+			break;
+		//Collapse Teleport Player
+
+		//X
+		case 161:
+			Features::ManipulatePlayer.TeleportPlayer_SetInputValue_X(value);
+			break;
+		//Y
+		case 162:
+			Features::ManipulatePlayer.TeleportPlayer_SetInputValue_Y(value);
+			break;
+		//Z
+		case 163:
+			Features::ManipulatePlayer.TeleportPlayer_SetInputValue_Z(value);
+			break;
+		//Teleport Player
+		case 164:
+			Features::ManipulatePlayer.TeleportPlayer_Button_TeleportPlayer();
+			break;
+		//Teleport Player To Me
+		case 165:
+			Features::ManipulatePlayer.TeleportPlayer_Button_TeleportPlayerToMe();
+			break;
+		//Ban Player
+		case 168:
+			Features::ManipulatePlayer.TeleportPlayer_Button_BanPlayer();
 			break;
 		//Miscellaneous
 
 		//Antiban
-		case 147:
+		case 169:
 			Features::Miscellaneous.CheckBox_Antiban();
 			break;
 		//Bypass Force Update
-		case 148:
+		case 170:
 			Features::Miscellaneous.CheckBox_BypassForceUpdate();
 			break;
 		//No Ads
-		case 149:
+		case 171:
 			Features::Miscellaneous.CheckBox_NoAds();
 			break;
 		//60 FPS
-		case 150:
+		case 172:
 			Features::Miscellaneous.CheckBox_60Fps();
+			break;
+		//Collapse Teleport Player
+
+		//Speedhack
+		case 173:
+			Features::Miscellaneous.TeleportPlayer_SetInputValue_Speedhack(value);
+			break;
+		//Speedhack
+		case 174:
+			Features::Miscellaneous.TeleportPlayer_Toggle_Speedhack();
+			break;
+		//Collapse Ban Player
+
+		//Player ID
+		case 175:
+			Features::Miscellaneous.BanPlayer_SetInputValue_PlayerId(value);
+			break;
+		//Ban Player
+		case 176:
+			Features::Miscellaneous.BanPlayer_Button_BanPlayer();
 			break;
 	}
     updatehooksready = true;

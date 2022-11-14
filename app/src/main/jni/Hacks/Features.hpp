@@ -1,4 +1,4 @@
-const char* ChatSpamMessage = "Polywar Mod Menu by HorridModz";
+//const char* ChatSpamMessage = "Polywar Mod Menu by HorridModz";
 
 namespace Features {
 	struct CurrencyHacks {
@@ -714,6 +714,46 @@ namespace Features {
 	};
 	WeaponsHacks Weapons;
 
+	struct GrenadesHacks {
+		//Infinite Grenades
+		bool isInfiniteGrenades = false;
+		bool updateToggle_InfiniteGrenades = false;
+		bool isToggle_InfiniteGrenadesFirstCall = true;
+		void Toggle_InfiniteGrenades() {
+			if (!isToggle_InfiniteGrenadesFirstCall) {
+				isInfiniteGrenades = true;
+				updateToggle_InfiniteGrenades = true;
+			} else {
+				isToggle_InfiniteGrenadesFirstCall = false;
+			}
+		}
+		//Grenade Spam
+		bool isGrenadeSpam = false;
+		bool updateToggle_GrenadeSpam = false;
+		bool isToggle_GrenadeSpamFirstCall = true;
+		void Toggle_GrenadeSpam() {
+			if (!isToggle_GrenadeSpamFirstCall) {
+				isGrenadeSpam = true;
+				updateToggle_GrenadeSpam = true;
+			} else {
+				isToggle_GrenadeSpamFirstCall = false;
+			}
+		}
+		//No Grenade Animation
+		bool isNoGrenadeAnimation = false;
+		bool updateToggle_NoGrenadeAnimation = false;
+		bool isToggle_NoGrenadeAnimationFirstCall = true;
+		void Toggle_NoGrenadeAnimation() {
+			if (!isToggle_NoGrenadeAnimationFirstCall) {
+				isNoGrenadeAnimation = true;
+				updateToggle_NoGrenadeAnimation = true;
+			} else {
+				isToggle_NoGrenadeAnimationFirstCall = false;
+			}
+		}
+	};
+	GrenadesHacks Grenades;
+
 	struct AimbotHacks {
 		//Aimbot
 		bool isAimbot = false;
@@ -903,46 +943,6 @@ namespace Features {
 		}
 	};
 	KillPlayersHacks KillPlayers;
-
-	struct GrenadesHacks {
-		//Infinite Grenades
-		bool isInfiniteGrenades = false;
-		bool updateToggle_InfiniteGrenades = false;
-		bool isToggle_InfiniteGrenadesFirstCall = true;
-		void Toggle_InfiniteGrenades() {
-			if (!isToggle_InfiniteGrenadesFirstCall) {
-				isInfiniteGrenades = true;
-				updateToggle_InfiniteGrenades = true;
-			} else {
-				isToggle_InfiniteGrenadesFirstCall = false;
-			}
-		}
-		//Grenade Spam
-		bool isGrenadeSpam = false;
-		bool updateToggle_GrenadeSpam = false;
-		bool isToggle_GrenadeSpamFirstCall = true;
-		void Toggle_GrenadeSpam() {
-			if (!isToggle_GrenadeSpamFirstCall) {
-				isGrenadeSpam = true;
-				updateToggle_GrenadeSpam = true;
-			} else {
-				isToggle_GrenadeSpamFirstCall = false;
-			}
-		}
-		//No Grenade Animation
-		bool isNoGrenadeAnimation = false;
-		bool updateToggle_NoGrenadeAnimation = false;
-		bool isToggle_NoGrenadeAnimationFirstCall = true;
-		void Toggle_NoGrenadeAnimation() {
-			if (!isToggle_NoGrenadeAnimationFirstCall) {
-				isNoGrenadeAnimation = true;
-				updateToggle_NoGrenadeAnimation = true;
-			} else {
-				isToggle_NoGrenadeAnimationFirstCall = false;
-			}
-		}
-	};
-	GrenadesHacks Grenades;
 
 	struct VisionHacks {
 		//Collapse ESP
@@ -1786,16 +1786,64 @@ namespace Features {
 	BotsHacks Bots;
 
 	struct MatchHacks {
-		//Chat Spam
-		bool isChatSpam = false;
-		bool updateToggle_ChatSpam = false;
-		bool isToggle_ChatSpamFirstCall = true;
-		void Toggle_ChatSpam() {
-			if (!isToggle_ChatSpamFirstCall) {
-				isChatSpam = true;
-				updateToggle_ChatSpam = true;
+		//Chat Spam Message
+		std::string InputText_ChatSpamMessage = "Default";
+		bool updateInputText_ChatSpamMessage = false;
+		bool isInputText_ChatSpamMessageFirstCall = true;
+		void SetInputText_ChatSpamMessage(std::string value) {
+			if (!isInputText_ChatSpamMessageFirstCall) {
+				InputText_ChatSpamMessage = value;
+				updateInputText_ChatSpamMessage = true;
+		} else {
+				isInputText_ChatSpamMessageFirstCall = false;
+			}
+		}
+		//Chat Spam V1
+		bool isChatSpamV1 = false;
+		bool updateToggle_ChatSpamV1 = false;
+		bool isToggle_ChatSpamV1FirstCall = true;
+		void Toggle_ChatSpamV1() {
+			if (!isToggle_ChatSpamV1FirstCall) {
+				isChatSpamV1 = true;
+				updateToggle_ChatSpamV1 = true;
 			} else {
-				isToggle_ChatSpamFirstCall = false;
+				isToggle_ChatSpamV1FirstCall = false;
+			}
+		}
+		//Chat Spam V2
+		bool isChatSpamV2 = false;
+		bool updateToggle_ChatSpamV2 = false;
+		bool isToggle_ChatSpamV2FirstCall = true;
+		void Toggle_ChatSpamV2() {
+			if (!isToggle_ChatSpamV2FirstCall) {
+				isChatSpamV2 = true;
+				updateToggle_ChatSpamV2 = true;
+			} else {
+				isToggle_ChatSpamV2FirstCall = false;
+			}
+		}
+		//Lock Lobby (Disable Joining)
+		bool isLockLobbyDisableJoining = false;
+		bool updateToggle_LockLobbyDisableJoining = false;
+		bool isToggle_LockLobbyDisableJoiningFirstCall = true;
+		void Toggle_LockLobbyDisableJoining() {
+			if (!isToggle_LockLobbyDisableJoiningFirstCall) {
+				isLockLobbyDisableJoining = true;
+				updateToggle_LockLobbyDisableJoining = true;
+			} else {
+				isToggle_LockLobbyDisableJoiningFirstCall = false;
+			}
+		}
+		//Kick All Players
+		bool Button_isKickAllPlayers = false;
+		bool updateButton_KickAllPlayers = false;
+		bool isButton_KickAllPlayersFirstCall = true;
+		void Button_KickAllPlayers() {
+			if (!isButton_KickAllPlayersFirstCall) {
+				Button_isKickAllPlayers = true;
+				updateButton_KickAllPlayers = true;
+			} else {
+				isButton_KickAllPlayersFirstCall = false;
 			}
 		}
 
@@ -1848,20 +1896,242 @@ namespace Features {
 				isMatchTime_Button_SetTimeFirstCall = false;
 			}
 		}
-		//Freeze Match Tine
-		bool MatchTime_isFreezeMatchTine = false;
-		bool updateMatchTime_CheckBox_FreezeMatchTine = false;
-		bool isMatchTime_CheckBox_FreezeMatchTineFirstCall = true;
-		void MatchTime_CheckBox_FreezeMatchTine() {
-			if (!isMatchTime_CheckBox_FreezeMatchTineFirstCall) {
-				MatchTime_isFreezeMatchTine = true;
-				updateMatchTime_CheckBox_FreezeMatchTine = true;
+		//Match Speed Multiplier
+		int MatchTime_InputValue_MatchSpeedMultiplier = 1;
+		bool updateMatchTime_InputValue_MatchSpeedMultiplier = false;
+		bool isMatchTime_InputValue_MatchSpeedMultiplierFirstCall = true;
+		void MatchTime_SetInputValue_MatchSpeedMultiplier(int value) {
+			if (!isMatchTime_InputValue_MatchSpeedMultiplierFirstCall) {
+				MatchTime_InputValue_MatchSpeedMultiplier = value;
+				updateMatchTime_InputValue_MatchSpeedMultiplier = true;
+		} else {
+				isMatchTime_InputValue_MatchSpeedMultiplierFirstCall = false;
+			}
+		}
+		//Match Speed Multiplier
+		bool MatchTime_isMatchSpeedMultiplier = false;
+		bool updateMatchTime_Toggle_MatchSpeedMultiplier = false;
+		bool isMatchTime_Toggle_MatchSpeedMultiplierFirstCall = true;
+		void MatchTime_Toggle_MatchSpeedMultiplier() {
+			if (!isMatchTime_Toggle_MatchSpeedMultiplierFirstCall) {
+				MatchTime_isMatchSpeedMultiplier = true;
+				updateMatchTime_Toggle_MatchSpeedMultiplier = true;
 			} else {
-				isMatchTime_CheckBox_FreezeMatchTineFirstCall = false;
+				isMatchTime_Toggle_MatchSpeedMultiplierFirstCall = false;
+			}
+		}
+		//Freeze Match Time
+		bool MatchTime_isFreezeMatchTime = false;
+		bool updateMatchTime_CheckBox_FreezeMatchTime = false;
+		bool isMatchTime_CheckBox_FreezeMatchTimeFirstCall = true;
+		void MatchTime_CheckBox_FreezeMatchTime() {
+			if (!isMatchTime_CheckBox_FreezeMatchTimeFirstCall) {
+				MatchTime_isFreezeMatchTime = true;
+				updateMatchTime_CheckBox_FreezeMatchTime = true;
+			} else {
+				isMatchTime_CheckBox_FreezeMatchTimeFirstCall = false;
 			}
 		}
 	};
 	MatchHacks Match;
+
+	struct ManipulatePlayerHacks {
+		//Player Name
+		std::string InputText_PlayerName = "Default";
+		bool updateInputText_PlayerName = false;
+		bool isInputText_PlayerNameFirstCall = true;
+		void SetInputText_PlayerName(std::string value) {
+			if (!isInputText_PlayerNameFirstCall) {
+				InputText_PlayerName = value;
+				updateInputText_PlayerName = true;
+		} else {
+				isInputText_PlayerNameFirstCall = false;
+			}
+		}
+		//Score
+		int InputValue_Score = 1;
+		bool updateInputValue_Score = false;
+		bool isInputValue_ScoreFirstCall = true;
+		void SetInputValue_Score(int value) {
+			if (!isInputValue_ScoreFirstCall) {
+				InputValue_Score = value;
+				updateInputValue_Score = true;
+		} else {
+				isInputValue_ScoreFirstCall = false;
+			}
+		}
+		//Set Score
+		bool Button_isSetScore = false;
+		bool updateButton_SetScore = false;
+		bool isButton_SetScoreFirstCall = true;
+		void Button_SetScore() {
+			if (!isButton_SetScoreFirstCall) {
+				Button_isSetScore = true;
+				updateButton_SetScore = true;
+			} else {
+				isButton_SetScoreFirstCall = false;
+			}
+		}
+		//Kills
+		int InputValue_Kills = 1;
+		bool updateInputValue_Kills = false;
+		bool isInputValue_KillsFirstCall = true;
+		void SetInputValue_Kills(int value) {
+			if (!isInputValue_KillsFirstCall) {
+				InputValue_Kills = value;
+				updateInputValue_Kills = true;
+		} else {
+				isInputValue_KillsFirstCall = false;
+			}
+		}
+		//Set Kills
+		bool Button_isSetKills = false;
+		bool updateButton_SetKills = false;
+		bool isButton_SetKillsFirstCall = true;
+		void Button_SetKills() {
+			if (!isButton_SetKillsFirstCall) {
+				Button_isSetKills = true;
+				updateButton_SetKills = true;
+			} else {
+				isButton_SetKillsFirstCall = false;
+			}
+		}
+		//Switch Player Team
+		bool Button_isSwitchPlayerTeam = false;
+		bool updateButton_SwitchPlayerTeam = false;
+		bool isButton_SwitchPlayerTeamFirstCall = true;
+		void Button_SwitchPlayerTeam() {
+			if (!isButton_SwitchPlayerTeamFirstCall) {
+				Button_isSwitchPlayerTeam = true;
+				updateButton_SwitchPlayerTeam = true;
+			} else {
+				isButton_SwitchPlayerTeamFirstCall = false;
+			}
+		}
+		//Heal Player
+		bool Button_isHealPlayer = false;
+		bool updateButton_HealPlayer = false;
+		bool isButton_HealPlayerFirstCall = true;
+		void Button_HealPlayer() {
+			if (!isButton_HealPlayerFirstCall) {
+				Button_isHealPlayer = true;
+				updateButton_HealPlayer = true;
+			} else {
+				isButton_HealPlayerFirstCall = false;
+			}
+		}
+		//Kill Player
+		bool Button_isKillPlayer = false;
+		bool updateButton_KillPlayer = false;
+		bool isButton_KillPlayerFirstCall = true;
+		void Button_KillPlayer() {
+			if (!isButton_KillPlayerFirstCall) {
+				Button_isKillPlayer = true;
+				updateButton_KillPlayer = true;
+			} else {
+				isButton_KillPlayerFirstCall = false;
+			}
+		}
+		//Freeze Player
+		bool isFreezePlayer = false;
+		bool updateCheckBox_FreezePlayer = false;
+		bool isCheckBox_FreezePlayerFirstCall = true;
+		void CheckBox_FreezePlayer() {
+			if (!isCheckBox_FreezePlayerFirstCall) {
+				isFreezePlayer = true;
+				updateCheckBox_FreezePlayer = true;
+			} else {
+				isCheckBox_FreezePlayerFirstCall = false;
+			}
+		}
+		//Kick Player
+		bool Button_isKickPlayer = false;
+		bool updateButton_KickPlayer = false;
+		bool isButton_KickPlayerFirstCall = true;
+		void Button_KickPlayer() {
+			if (!isButton_KickPlayerFirstCall) {
+				Button_isKickPlayer = true;
+				updateButton_KickPlayer = true;
+			} else {
+				isButton_KickPlayerFirstCall = false;
+			}
+		}
+
+		//Collapse Teleport Player
+		//X
+		int TeleportPlayer_InputValue_X = 1;
+		bool updateTeleportPlayer_InputValue_X = false;
+		bool isTeleportPlayer_InputValue_XFirstCall = true;
+		void TeleportPlayer_SetInputValue_X(int value) {
+			if (!isTeleportPlayer_InputValue_XFirstCall) {
+				TeleportPlayer_InputValue_X = value;
+				updateTeleportPlayer_InputValue_X = true;
+		} else {
+				isTeleportPlayer_InputValue_XFirstCall = false;
+			}
+		}
+		//Y
+		int TeleportPlayer_InputValue_Y = 1;
+		bool updateTeleportPlayer_InputValue_Y = false;
+		bool isTeleportPlayer_InputValue_YFirstCall = true;
+		void TeleportPlayer_SetInputValue_Y(int value) {
+			if (!isTeleportPlayer_InputValue_YFirstCall) {
+				TeleportPlayer_InputValue_Y = value;
+				updateTeleportPlayer_InputValue_Y = true;
+		} else {
+				isTeleportPlayer_InputValue_YFirstCall = false;
+			}
+		}
+		//Z
+		int TeleportPlayer_InputValue_Z = 1;
+		bool updateTeleportPlayer_InputValue_Z = false;
+		bool isTeleportPlayer_InputValue_ZFirstCall = true;
+		void TeleportPlayer_SetInputValue_Z(int value) {
+			if (!isTeleportPlayer_InputValue_ZFirstCall) {
+				TeleportPlayer_InputValue_Z = value;
+				updateTeleportPlayer_InputValue_Z = true;
+		} else {
+				isTeleportPlayer_InputValue_ZFirstCall = false;
+			}
+		}
+		//Teleport Player
+		bool TeleportPlayer_Button_isTeleportPlayer = false;
+		bool updateTeleportPlayer_Button_TeleportPlayer = false;
+		bool isTeleportPlayer_Button_TeleportPlayerFirstCall = true;
+		void TeleportPlayer_Button_TeleportPlayer() {
+			if (!isTeleportPlayer_Button_TeleportPlayerFirstCall) {
+				TeleportPlayer_Button_isTeleportPlayer = true;
+				updateTeleportPlayer_Button_TeleportPlayer = true;
+			} else {
+				isTeleportPlayer_Button_TeleportPlayerFirstCall = false;
+			}
+		}
+		//Teleport Player To Me
+		bool TeleportPlayer_Button_isTeleportPlayerToMe = false;
+		bool updateTeleportPlayer_Button_TeleportPlayerToMe = false;
+		bool isTeleportPlayer_Button_TeleportPlayerToMeFirstCall = true;
+		void TeleportPlayer_Button_TeleportPlayerToMe() {
+			if (!isTeleportPlayer_Button_TeleportPlayerToMeFirstCall) {
+				TeleportPlayer_Button_isTeleportPlayerToMe = true;
+				updateTeleportPlayer_Button_TeleportPlayerToMe = true;
+			} else {
+				isTeleportPlayer_Button_TeleportPlayerToMeFirstCall = false;
+			}
+		}
+		//Ban Player
+		bool TeleportPlayer_Button_isBanPlayer = false;
+		bool updateTeleportPlayer_Button_BanPlayer = false;
+		bool isTeleportPlayer_Button_BanPlayerFirstCall = true;
+		void TeleportPlayer_Button_BanPlayer() {
+			if (!isTeleportPlayer_Button_BanPlayerFirstCall) {
+				TeleportPlayer_Button_isBanPlayer = true;
+				updateTeleportPlayer_Button_BanPlayer = true;
+			} else {
+				isTeleportPlayer_Button_BanPlayerFirstCall = false;
+			}
+		}
+	};
+	ManipulatePlayerHacks ManipulatePlayer;
 
 	struct MiscellaneousHacks {
 		//Antiban
@@ -1910,6 +2180,58 @@ namespace Features {
 				updateCheckBox_60Fps = true;
 			} else {
 				isCheckBox_60FpsFirstCall = false;
+			}
+		}
+
+		//Collapse Teleport Player
+		//Speedhack
+		int TeleportPlayer_InputValue_Speedhack = 1;
+		bool updateTeleportPlayer_InputValue_Speedhack = false;
+		bool isTeleportPlayer_InputValue_SpeedhackFirstCall = true;
+		void TeleportPlayer_SetInputValue_Speedhack(int value) {
+			if (!isTeleportPlayer_InputValue_SpeedhackFirstCall) {
+				TeleportPlayer_InputValue_Speedhack = value;
+				updateTeleportPlayer_InputValue_Speedhack = true;
+		} else {
+				isTeleportPlayer_InputValue_SpeedhackFirstCall = false;
+			}
+		}
+		//Speedhack
+		bool TeleportPlayer_isSpeedhack = false;
+		bool updateTeleportPlayer_Toggle_Speedhack = false;
+		bool isTeleportPlayer_Toggle_SpeedhackFirstCall = true;
+		void TeleportPlayer_Toggle_Speedhack() {
+			if (!isTeleportPlayer_Toggle_SpeedhackFirstCall) {
+				TeleportPlayer_isSpeedhack = true;
+				updateTeleportPlayer_Toggle_Speedhack = true;
+			} else {
+				isTeleportPlayer_Toggle_SpeedhackFirstCall = false;
+			}
+		}
+
+		//Collapse Ban Player
+		//Player ID
+		int BanPlayer_InputValue_PlayerId = 1;
+		bool updateBanPlayer_InputValue_PlayerId = false;
+		bool isBanPlayer_InputValue_PlayerIdFirstCall = true;
+		void BanPlayer_SetInputValue_PlayerId(int value) {
+			if (!isBanPlayer_InputValue_PlayerIdFirstCall) {
+				BanPlayer_InputValue_PlayerId = value;
+				updateBanPlayer_InputValue_PlayerId = true;
+		} else {
+				isBanPlayer_InputValue_PlayerIdFirstCall = false;
+			}
+		}
+		//Ban Player
+		bool BanPlayer_Button_isBanPlayer = false;
+		bool updateBanPlayer_Button_BanPlayer = false;
+		bool isBanPlayer_Button_BanPlayerFirstCall = true;
+		void BanPlayer_Button_BanPlayer() {
+			if (!isBanPlayer_Button_BanPlayerFirstCall) {
+				BanPlayer_Button_isBanPlayer = true;
+				updateBanPlayer_Button_BanPlayer = true;
+			} else {
+				isBanPlayer_Button_BanPlayerFirstCall = false;
 			}
 		}
 	};

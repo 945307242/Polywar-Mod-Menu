@@ -3,6 +3,10 @@ namespace Offsets {
 	struct FieldOffsets {
 		//PlayerScript
 		const uint64_t InfiniteGrenades = 0x140; //PlayerScript.frags
+		const uint64_t Health = 0x238; //PlayerScript.health
+		const uint64_t Armor = 0x244; //PlayerScript.armor
+		const uint64_t Team = 0x250; //PlayerScript.team
+		const uint64_t PlayerName = 0x1E8; //PlayerScript._playerName
 
 		//PlayerConfig
 		const uint64_t AutoAimForce = 0x20; //PlayerController.autoaimForce
@@ -27,6 +31,9 @@ namespace Offsets {
 		const uint64_t isGrounded = 0x50; //PlayerController.isGrounded
 	};
 	struct MethodOffsets {
+		//String
+		const uint64_t String_CreateString = 0xF99550; //String.CreateString(char* value)
+
 		//WeaponScript
 		const uint64_t WeaponScript_Update = 0x160D9D4; //WeaponScript.Update
 		const uint64_t WeaponScript_CanShoot = 0x160B9C4; //WeaponScript.canShoot
@@ -42,6 +49,7 @@ namespace Offsets {
 		const uint64_t PlayerScript_Respawn = 0x151A0A4; //PlayerScript.Respawn
 		const uint64_t PlayerScript_Respawn_Internal = 0x15102E0; //PlayerScript._Respawn
 		const uint64_t PlayerScript_Teleport = 0x1519764; //PlayerScript.Teleport
+		const uint64_t PlayerScript_get_playerName = 0x15118D4; //PlayerScript.get_playerName
 
 		//PlayerController
 		const uint64_t PlayerController_Update = 0x150F7D0; //PlayerController.Update
@@ -62,6 +70,9 @@ namespace Offsets {
 
 		//SocialNetBase
 		const uint64_t SocialNetBase_BuyVIP = 0x162E044; //SocialNetBase.BuyVIP
+		
+		//BattleControllerScript
+		const uint64_t BattleControllerScript_get_isSpectator = 0x16AF664; //BattleControllerScript.get_isSpectator
 
 	};
 	FieldOffsets Fields;
@@ -72,6 +83,10 @@ namespace Offsets {
 	struct FieldOffsets {
 		//PlayerScript
 		const uint64_t InfiniteGrenades = 0x1C4; //PlayerScript.frags
+		const uint64_t Health = 0x1A4; //PlayerScript.health
+		const uint64_t Armor = 0x1B0; //PlayerScript.armor
+		const uint64_t Team = 0x1BC; //PlayerScript.team
+		const uint64_t PlayerName = 0x164; //PlayerScript._playerName
 
 		//PlayerConfig
 		const uint64_t AutoAimForce = 0x38; //PlayerController.autoaimForce
@@ -96,6 +111,9 @@ namespace Offsets {
 		const uint64_t isGrounded = 0x3C; //PlayerController.isGrounded
 	};
 	struct MethodOffsets {
+		//String
+		const uint64_t String_CreateString = 0xCEC160; //String.CreateString(char* value)
+		
 		//WeaponScript
 		const uint64_t WeaponScript_Update = 0x14B13A0; //WeaponScript.Update
 		const uint64_t WeaponScript_CanShoot = 0x14AE744; //WeaponScript.canShoot
@@ -111,6 +129,7 @@ namespace Offsets {
 		const uint64_t PlayerScript_Respawn = 0x137EFDC; //PlayerScript.Respawn
 		const uint64_t PlayerScript_Respawn_Internal = 0x137184C; //PlayerScript._Respawn
 		const uint64_t PlayerScript_Teleport = 0x137E430; //PlayerScript.Teleport
+		const uint64_t PlayerScript_get_playerName = 0x1373490; //PlayerScript.get_playerName
 
 		//PlayerController
 		const uint64_t PlayerController_Update = 0x1370A94; //PlayerController.Update
@@ -131,6 +150,9 @@ namespace Offsets {
 				
 		//SocialNetBase
 		const uint64_t SocialNetBase_BuyVIP = 0x14DC400; //SocialNetBase.BuyVIP
+		
+		//BattleControllerScript
+		const uint64_t BattleControllerScript_get_isSpectator = 0x157FD70; //BattleControllerScript.get_isSpectator
 	};
 	FieldOffsets Fields;
 	MethodOffsets Methods;
